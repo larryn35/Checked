@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		5C16F7E2263B6F0E0087C325 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C16F7E1263B6F0E0087C325 /* CloudKit.framework */; };
 		5C16F7E4263B78700087C325 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C16F7E3263B78700087C325 /* TaskList.swift */; };
+		5C16F7E7263B78CA0087C325 /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5C16F7E5263B78CA0087C325 /* TaskModel.xcdatamodeld */; };
+		5C16F7EA263B79A60087C325 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C16F7E8263B79A60087C325 /* Task+CoreDataClass.swift */; };
+		5C16F7EB263B79A60087C325 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C16F7E9263B79A60087C325 /* Task+CoreDataProperties.swift */; };
 		5C5307C7263B571700F6E59A /* CheckedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307C6263B571700F6E59A /* CheckedApp.swift */; };
 		5C5307CB263B572000F6E59A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C5307CA263B572000F6E59A /* Assets.xcassets */; };
 		5C5307CE263B572000F6E59A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C5307CD263B572000F6E59A /* Preview Assets.xcassets */; };
 		5C5307D0263B572000F6E59A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307CF263B572000F6E59A /* Persistence.swift */; };
-		5C5307D3263B572000F6E59A /* Checked.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307D1263B572000F6E59A /* Checked.xcdatamodeld */; };
 		5C5307DE263B572100F6E59A /* CheckedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307DD263B572100F6E59A /* CheckedTests.swift */; };
 		5C5307E9263B572100F6E59A /* CheckedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307E8263B572100F6E59A /* CheckedUITests.swift */; };
 /* End PBXBuildFile section */
@@ -39,12 +41,14 @@
 		5C16F7DF263B6F0A0087C325 /* Checked.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Checked.entitlements; sourceTree = "<group>"; };
 		5C16F7E1263B6F0E0087C325 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		5C16F7E3263B78700087C325 /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
+		5C16F7E6263B78CA0087C325 /* TaskModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskModel.xcdatamodel; sourceTree = "<group>"; };
+		5C16F7E8263B79A60087C325 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5C16F7E9263B79A60087C325 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5C5307C3263B571700F6E59A /* Checked.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checked.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5307C6263B571700F6E59A /* CheckedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedApp.swift; sourceTree = "<group>"; };
 		5C5307CA263B572000F6E59A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C5307CD263B572000F6E59A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5C5307CF263B572000F6E59A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		5C5307D2263B572000F6E59A /* Checked.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Checked.xcdatamodel; sourceTree = "<group>"; };
 		5C5307D4263B572000F6E59A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C5307D9263B572100F6E59A /* CheckedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5307DD263B572100F6E59A /* CheckedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedTests.swift; sourceTree = "<group>"; };
@@ -113,7 +117,9 @@
 			isa = PBXGroup;
 			children = (
 				5C16F7DF263B6F0A0087C325 /* Checked.entitlements */,
-				5C5307D1263B572000F6E59A /* Checked.xcdatamodeld */,
+				5C16F7E8263B79A60087C325 /* Task+CoreDataClass.swift */,
+				5C16F7E9263B79A60087C325 /* Task+CoreDataProperties.swift */,
+				5C16F7E5263B78CA0087C325 /* TaskModel.xcdatamodeld */,
 				5C5307C6263B571700F6E59A /* CheckedApp.swift */,
 				5C16F7E3263B78700087C325 /* TaskList.swift */,
 				5C5307CF263B572000F6E59A /* Persistence.swift */,
@@ -280,9 +286,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C5307D0263B572000F6E59A /* Persistence.swift in Sources */,
+				5C16F7EA263B79A60087C325 /* Task+CoreDataClass.swift in Sources */,
 				5C16F7E4263B78700087C325 /* TaskList.swift in Sources */,
+				5C16F7E7263B78CA0087C325 /* TaskModel.xcdatamodeld in Sources */,
+				5C16F7EB263B79A60087C325 /* Task+CoreDataProperties.swift in Sources */,
 				5C5307C7263B571700F6E59A /* CheckedApp.swift in Sources */,
-				5C5307D3263B572000F6E59A /* Checked.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,13 +614,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		5C5307D1263B572000F6E59A /* Checked.xcdatamodeld */ = {
+		5C16F7E5263B78CA0087C325 /* TaskModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				5C5307D2263B572000F6E59A /* Checked.xcdatamodel */,
+				5C16F7E6263B78CA0087C325 /* TaskModel.xcdatamodel */,
 			);
-			currentVersion = 5C5307D2263B572000F6E59A /* Checked.xcdatamodel */;
-			path = Checked.xcdatamodeld;
+			currentVersion = 5C16F7E6263B78CA0087C325 /* TaskModel.xcdatamodel */;
+			path = TaskModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
