@@ -36,10 +36,7 @@ final class TaskListViewModel: ObservableObject {
     showDatePicker = false
   }
   
-  func deleteTask(at offSets: IndexSet) {
-    offSets.forEach { index in
-      let task = tasks[index]
-      taskManager.deleteTask(task)
-    }
+  func deleteTask(task: Task) {
+    taskManager.deleteTask(task)
   }
 }
