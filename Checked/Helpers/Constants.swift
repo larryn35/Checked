@@ -28,7 +28,7 @@ struct Constants {
   
   static let baseAppBG: Color = Color("appBG")
   static let summaryBG: Color = Color("summaryBG")
-  static let taskRowBG: Color = Color("taskBG")
+  static let taskRowBG: Color = Color("taskRowBG")
   static let textColor: Color = Color("textColor")
   
   static let gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [blue, orange]), startPoint: .topLeading, endPoint: .bottomTrailing)
