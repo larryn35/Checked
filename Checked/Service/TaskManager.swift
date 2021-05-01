@@ -54,3 +54,18 @@ final class TaskManager: TaskManagerProtocol {
     PersistenceController.shared.save()
   }
 }
+
+final class InfoTaskManager: TaskManagerProtocol {
+  func addTask(title: String, deadline: Date?) {
+  }
+  
+  func getTasks() -> [Task] {
+    []
+  }
+  
+  func updateTask(_ task: Task, title: String, deadline: Date?) {
+  }
+  
+  func deleteTask(_ task: Task) {
+  }
+}
