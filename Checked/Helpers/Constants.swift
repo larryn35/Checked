@@ -27,8 +27,8 @@ struct Constants {
   static let priorityBGColors = [lowPriorityBG, medPriorityBG, highPriorityBG]
   
   static let baseAppBG: Color = Color("appBG")
-  static let summaryBG: Color = Color("summaryBackground")
-  static let taskRowBG: Color = Color("taskBackground")
+  static let summaryBG: Color = Color("summaryBG")
+  static let taskRowBG: Color = Color("taskBG")
   static let textColor: Color = Color("textColor")
   
   static let gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [blue, orange]), startPoint: .topLeading, endPoint: .bottomTrailing)
