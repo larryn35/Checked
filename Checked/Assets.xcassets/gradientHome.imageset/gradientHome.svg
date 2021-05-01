@@ -1,0 +1,61 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 420" width="450" height="420">
+	<title>gradientHome</title>
+	<defs>
+		<linearGradient id="grd1" gradientUnits="userSpaceOnUse"  x1="0" y1="-197" x2="450" y2="-197">
+			<stop offset="0" stop-color="#3522ac"  />
+			<stop offset="0.59" stop-color="#c64493"  />
+			<stop offset="1" stop-color="#ea7b4b"  />
+		</linearGradient>
+		<linearGradient id="grd2" gradientUnits="userSpaceOnUse"  x1="0" y1="-6" x2="450" y2="-6">
+			<stop offset="0" stop-color="#3522ac"  />
+			<stop offset="0.59" stop-color="#c64493"  />
+			<stop offset="1" stop-color="#ea7b4b"  />
+		</linearGradient>
+		<linearGradient id="grd3" gradientUnits="userSpaceOnUse"  x1="0" y1="-179" x2="450" y2="-179">
+			<stop offset="0" stop-color="#3522ac"  />
+			<stop offset="0.59" stop-color="#c64493"  />
+			<stop offset="1" stop-color="#ea7b4b"  />
+		</linearGradient>
+		<linearGradient id="grd4" gradientUnits="userSpaceOnUse"  x1="140.019" y1="139" x2="191.981" y2="49">
+			<stop offset="0" stop-color="#ffffff" stop-opacity="0.6" />
+			<stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+		</linearGradient>
+		<linearGradient id="grd5" gradientUnits="userSpaceOnUse"  x1="-22.844" y1="284" x2="127.844" y2="23">
+			<stop offset="0" stop-color="#ffffff" stop-opacity="0.6" />
+			<stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+		</linearGradient>
+		<linearGradient id="grd6" gradientUnits="userSpaceOnUse"  x1="-236" y1="-176.614" x2="544.17" y2="-176.614">
+			<stop offset="0.02" stop-color="#ffffff" stop-opacity="0.6" />
+			<stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+		</linearGradient>
+		<linearGradient id="grd7" gradientUnits="userSpaceOnUse"  x1="111.113" y1="-118.873" x2="805.224" y2="-118.873">
+			<stop offset="0" stop-color="#ffffff"  />
+			<stop offset="1" stop-color="#ff0000" stop-opacity="0" />
+		</linearGradient>
+		<linearGradient id="grd8" gradientUnits="userSpaceOnUse"  x1="130.113" y1="-126.873" x2="824.224" y2="-126.873">
+			<stop offset="0" stop-color="#ffffff"  />
+			<stop offset="1" stop-color="#ff0000" stop-opacity="0" />
+		</linearGradient>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { opacity: 0.6;fill: url(#grd1) } 
+		.shp1 { opacity: 0.651;fill: url(#grd2) } 
+		.shp2 { fill: url(#grd3) } 
+		.shp3 { opacity: 0.102;fill: url(#grd4) } 
+		.shp4 { opacity: 0.102;fill: url(#grd5) } 
+		.shp5 { opacity: 0.2;fill: url(#grd6) } 
+		.shp6 { opacity: 0.2;fill: url(#grd7) } 
+		.shp7 { opacity: 0.2;fill: url(#grd8) } 
+	</style>
+	<g id="Layer">
+		<path id="Layer" class="shp0" d="M0 -197L0 158.03C75 183.95 150 188.7 225 172.28C300 155.86 375 134.47 450 108.12L450 -197L0 -197Z" />
+		<path id="Layer" class="shp1" d="M450 -6L450 382.29C375 418.4 300 417.27 225 378.88C150 340.47 75 352.18 0 413.98L0 -6L450 -6Z" />
+		<path id="Layer" class="shp2" d="M0 -179L0 101.35C75 157.21 150 171.1 225 143.04C300 114.97 375 122.28 450 164.96L450 -179L0 -179Z" />
+	</g>
+	<path id="Shape 1 copy 2" class="shp3" d="M166 139C141.12 139 121 118.89 121 94C121 69.11 141.12 49 166 49C190.88 49 211 69.11 211 94C211 118.89 190.88 139 166 139Z" />
+	<path id="Shape 1 copy" class="shp4" d="M52.5 284C-19.67 284 -78 225.67 -78 153.5C-78 81.33 -19.67 23 52.5 23C124.67 23 183 81.33 183 153.5C183 225.67 124.67 284 52.5 284Z" />
+	<path id="Shape 2" class="shp5" d="M88.49 -176.61L544.17 71.71L219.68 276.92L-236 28.6L88.49 -176.61Z" />
+	<path id="Shape 2 copy 2" class="shp6" d="M432.32 -36.85L805.22 237.61L484.02 155.58L111.11 -118.87L432.32 -36.85Z" />
+	<path id="Shape 2 copy 3" class="shp7" d="M451.32 -44.85L824.22 229.61L503.02 147.58L130.11 -126.87L451.32 -44.85Z" />
+</svg>
