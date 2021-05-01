@@ -59,9 +59,13 @@ struct TaskList: View {
           ScrollView {
             VStack(spacing: 10) {
               ForEach(vm.tasks) { task in
-                // Replace with TaskRow view
-                Text(task.title)
-                  .padding(.vertical)
+                TaskRow(taskChecked: {
+                  // Task completed
+                }, editTask: {
+                  modalType = .update(task)
+                }, deleteTask: {
+                  vm.deleteTask(task: task)
+                }, task: task)
               }
             }
           }
