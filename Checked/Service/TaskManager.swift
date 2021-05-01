@@ -16,8 +16,12 @@ protocol TaskManagerProtocol {
 }
 
 final class TaskManager: TaskManagerProtocol {
-  var viewContext: NSManagedObjectContext = PersistenceController.shared.viewContext
+  var viewContext: NSManagedObjectContext
 
+  init(viewContext: NSManagedObjectContext = PersistenceController.shared.viewContext) {
+    self.viewContext = viewContext
+  }
+  
   func addTask(title: String, deadline: Date?) {
     let newTask = Task(context: viewContext)
     newTask.id_ = UUID()

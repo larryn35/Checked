@@ -12,11 +12,13 @@
 		5C24B11C263CD37100773D9E /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24B11B263CD37100773D9E /* TaskListViewModel.swift */; };
 		5C24B11E263CD39900773D9E /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24B11D263CD39900773D9E /* TaskManager.swift */; };
 		5C24B121263CD3E600773D9E /* Checked.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5C24B11F263CD3E600773D9E /* Checked.xcdatamodeld */; };
+		5C24B131263CDDDC00773D9E /* CoreDataTestStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24B130263CDDDC00773D9E /* CoreDataTestStack.swift */; };
+		5C24B135263CE16B00773D9E /* Task+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24B134263CE16B00773D9E /* Task+Formatting.swift */; };
 		5C5307C7263B571700F6E59A /* CheckedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307C6263B571700F6E59A /* CheckedApp.swift */; };
 		5C5307CB263B572000F6E59A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C5307CA263B572000F6E59A /* Assets.xcassets */; };
 		5C5307CE263B572000F6E59A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C5307CD263B572000F6E59A /* Preview Assets.xcassets */; };
 		5C5307D0263B572000F6E59A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307CF263B572000F6E59A /* Persistence.swift */; };
-		5C5307DE263B572100F6E59A /* CheckedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307DD263B572100F6E59A /* CheckedTests.swift */; };
+		5C5307DE263B572100F6E59A /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307DD263B572100F6E59A /* CoreDataTests.swift */; };
 		5C5307E9263B572100F6E59A /* CheckedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307E8263B572100F6E59A /* CheckedUITests.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +46,8 @@
 		5C24B11B263CD37100773D9E /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		5C24B11D263CD39900773D9E /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		5C24B120263CD3E600773D9E /* Checked.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Checked.xcdatamodel; sourceTree = "<group>"; };
+		5C24B130263CDDDC00773D9E /* CoreDataTestStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTestStack.swift; sourceTree = "<group>"; };
+		5C24B134263CE16B00773D9E /* Task+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Formatting.swift"; sourceTree = "<group>"; };
 		5C5307C3263B571700F6E59A /* Checked.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checked.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5307C6263B571700F6E59A /* CheckedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedApp.swift; sourceTree = "<group>"; };
 		5C5307CA263B572000F6E59A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,7 +55,7 @@
 		5C5307CF263B572000F6E59A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5C5307D4263B572000F6E59A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C5307D9263B572100F6E59A /* CheckedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C5307DD263B572100F6E59A /* CheckedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedTests.swift; sourceTree = "<group>"; };
+		5C5307DD263B572100F6E59A /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		5C5307DF263B572100F6E59A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C5307E4263B572100F6E59A /* CheckedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5307E8263B572100F6E59A /* CheckedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedUITests.swift; sourceTree = "<group>"; };
@@ -132,6 +136,22 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		5C24B132263CE14800773D9E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5C24B133263CE15600773D9E /* Extensions */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		5C24B133263CE15600773D9E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5C24B134263CE16B00773D9E /* Task+Formatting.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5C5307BA263B571700F6E59A = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +183,7 @@
 				5C24B119263CD32000773D9E /* ViewModel */,
 				5C24B118263CD31400773D9E /* View */,
 				5C24B11A263CD33600773D9E /* Service */,
+				5C24B132263CE14800773D9E /* Helpers */,
 				5C5307D4263B572000F6E59A /* Info.plist */,
 				5C5307CA263B572000F6E59A /* Assets.xcassets */,
 				5C5307CC263B572000F6E59A /* Preview Content */,
@@ -181,7 +202,8 @@
 		5C5307DC263B572100F6E59A /* CheckedTests */ = {
 			isa = PBXGroup;
 			children = (
-				5C5307DD263B572100F6E59A /* CheckedTests.swift */,
+				5C24B130263CDDDC00773D9E /* CoreDataTestStack.swift */,
+				5C5307DD263B572100F6E59A /* CoreDataTests.swift */,
 				5C5307DF263B572100F6E59A /* Info.plist */,
 			);
 			path = CheckedTests;
@@ -331,6 +353,7 @@
 				5C24B121263CD3E600773D9E /* Checked.xcdatamodeld in Sources */,
 				5C16F7E4263B78700087C325 /* TaskList.swift in Sources */,
 				5C5307C7263B571700F6E59A /* CheckedApp.swift in Sources */,
+				5C24B135263CE16B00773D9E /* Task+Formatting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,7 +361,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C5307DE263B572100F6E59A /* CheckedTests.swift in Sources */,
+				5C5307DE263B572100F6E59A /* CoreDataTests.swift in Sources */,
+				5C24B131263CDDDC00773D9E /* CoreDataTestStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
