@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20E232" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Task" representedClassName="Task" syncable="YES" codeGenerationType="class">
+        <attribute name="dateCompleted_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateCreated_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="deadline_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="notes_" optional="YES" attributeType="String"/>
+        <attribute name="priority_" optional="YES" attributeType="String"/>
+        <attribute name="reminderDate_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title_" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Task" positionX="-63" positionY="0" width="128" height="149"/>
+    </elements>
+</model>
