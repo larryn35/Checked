@@ -45,22 +45,24 @@ struct TaskList: View {
             // Filter buttons
             filterButtonsSubview
             
-            // Sort buttons
+            // Sort button
             Button {
               // Sort list by deadline, priority, date created
+              vm.changeSort()
             } label: {
-              Label("Sort list", systemImage: "arrow.up.arrow.down") // Change text based on sort type
+              Label("Sorted by: \(vm.sortType.rawValue)", systemImage: "arrow.up.arrow.down") // Change text based on sort type
                 .font(.caption)
                 .foregroundColor(Constants.textColor)
             }
+            .accentColor(Constants.textColor)
           }
           
           // Task list
           ScrollView {
             VStack(spacing: 10) {
-              ForEach(vm.tasks) { task in
+              ForEach(vm.taskList) { task in
                 TaskRow(taskChecked: {
-                  // Task completed
+                  vm.updateTaskCompletion(for: task)
                 }, editTask: {
                   modalType = .update(task)
                 }, deleteTask: {
@@ -101,27 +103,26 @@ extension TaskList {
   
   private var filterButtonsSubview: some View {
     ScrollView(.horizontal) {
-      ScrollViewReader { target in
-        HStack(spacing: 20) {
-          ForEach(FilterType.allCases) { type in
-            Button {
-              withAnimation {
-                // Change filter type
-                target.scrollTo(type, anchor: .trailing)
-              }
-            } label: {
-              Text(type.rawValue)
-                .font(.subheadline)
-                .padding(.vertical, 10)
-//                .overlay(RoundedRectangle(cornerRadius: 10)
-//                          .fill(Constants.blue)
-//                          .frame(height: 2)
-//                          .scaleEffect(x: ) // Set scale to 1 if filter is highlighted, 0 otherwise
-//                         , alignment: .bottom)
-                .padding(.bottom, 5)
+      HStack(spacing: 20) {
+        ForEach(FilterType.allCases) { type in
+          Button {
+            withAnimation {
+              // Change filter type
+              vm.changeFilter(to: type)
             }
-            .id(type)
+          } label: {
+            Text(type.rawValue)
+              .font(.subheadline)
+              .padding(.vertical, 10)
+              .overlay(RoundedRectangle(cornerRadius: 10)
+                        .fill(Constants.blue)
+                        .frame(height: 2)
+                        .scaleEffect(x: vm.filterUnderlineScale(for: type))
+                       , alignment: .bottom)
+              .padding(.bottom, 5)
           }
+          .accentColor(Constants.textColor)
+          .id(type)
         }
       }
     }
@@ -134,19 +135,19 @@ extension TaskList {
           .foregroundColor(Constants.blue)
         
         Group {
-          Text("Active: 0")
-          Text("Cpmpleted: 0")
+          Text(vm.activeTasksString)
+          Text(vm.completedTasksString)
         }
         .foregroundColor(Constants.textColor)
       }
       .padding()
       
       VStack(alignment: .leading) {
-        Text("Overdue: 0")
-          .foregroundColor(Constants.magenta)
+        Text(vm.overdueTasksString)
+          .foregroundColor(vm.overdueTaskColor)
         Group {
-          Text("Due today: 0")
-          Text("Due soon: 0")
+          Text(vm.dueTodayString)
+          Text(vm.dueSoonString)
         }
         .foregroundColor(Constants.textColor)
       }

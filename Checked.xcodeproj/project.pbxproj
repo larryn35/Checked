@@ -34,6 +34,8 @@
 		5C5307D0263B572000F6E59A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307CF263B572000F6E59A /* Persistence.swift */; };
 		5C5307DE263B572100F6E59A /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307DD263B572100F6E59A /* CoreDataTests.swift */; };
 		5C5307E9263B572100F6E59A /* CheckedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307E8263B572100F6E59A /* CheckedUITests.swift */; };
+		5CFA1EBC263F4AE800E83A46 /* Array+Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1EBB263F4AE800E83A46 /* Array+Task.swift */; };
+		5CFA1EBE263F540D00E83A46 /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1EBD263F540C00E83A46 /* SortType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		5C5307E4263B572100F6E59A /* CheckedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5307E8263B572100F6E59A /* CheckedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedUITests.swift; sourceTree = "<group>"; };
 		5C5307EA263B572100F6E59A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CFA1EBB263F4AE800E83A46 /* Array+Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Task.swift"; sourceTree = "<group>"; };
+		5CFA1EBD263F540C00E83A46 /* SortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +184,7 @@
 				5C24B13D263CF32F00773D9E /* ModalType.swift */,
 				5C24B13F263CF47200773D9E /* FilterType.swift */,
 				5C24B147263D008600773D9E /* PriorityType.swift */,
+				5CFA1EBD263F540C00E83A46 /* SortType.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				5C24B134263CE16B00773D9E /* Task+Formatting.swift */,
+				5CFA1EBB263F4AE800E83A46 /* Array+Task.swift */,
 				5C351054263E799D008EFBF0 /* Publishers+Keyboard.swift */,
 				5C24B145263CFE5400773D9E /* Date+Formatting.swift */,
 			);
@@ -400,6 +406,7 @@
 				5C16F7E4263B78700087C325 /* TaskList.swift in Sources */,
 				5C24B14A263D041400773D9E /* TaskRowViewModel.swift in Sources */,
 				5C24B146263CFE5400773D9E /* Date+Formatting.swift in Sources */,
+				5CFA1EBE263F540D00E83A46 /* SortType.swift in Sources */,
 				5C24B13E263CF33000773D9E /* ModalType.swift in Sources */,
 				5C5307C7263B571700F6E59A /* CheckedApp.swift in Sources */,
 				5C24B148263D008600773D9E /* PriorityType.swift in Sources */,
@@ -409,6 +416,7 @@
 				5C24B137263CE99100773D9E /* Constants.swift in Sources */,
 				5C24B14E263D313C00773D9E /* InfoTask.swift in Sources */,
 				5C24B140263CF47200773D9E /* FilterType.swift in Sources */,
+				5CFA1EBC263F4AE800E83A46 /* Array+Task.swift in Sources */,
 				5C351051263E7069008EFBF0 /* TaskFormViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

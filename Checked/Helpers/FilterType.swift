@@ -23,9 +23,3 @@ extension FilterType: CaseIterable, Identifiable {
     }
   }
 }
-
-enum SortType: String {
-  case dateCreated = "Date Created (Oldest First)"
-  case deadline = "Deadline (Soonest First)"
-  case priority = "Priority (High to Low)"
-}
