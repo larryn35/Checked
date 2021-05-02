@@ -12,8 +12,20 @@ extension Task {
     title_ ?? "Task"
   }
   
+  var dateCreated: Date {
+    dateCreated_ ?? Date()
+  }
+  
+  var dateCompleted: Date {
+    dateCompleted_ ?? Date()
+  }
+  
   var taskCompleted: Bool {
     dateCompleted_ != nil
+  }
+  
+  var notes: String {
+    notes_ ?? "Add notes"
   }
   
   var deadlineSet: Bool {
