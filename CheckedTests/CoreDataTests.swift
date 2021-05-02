@@ -13,7 +13,11 @@ class CoreDataTests: XCTestCase {
   var taskManager: TaskManager!
   
   private func addTask(title: String = "Task 1") {
-    taskManager.addTask(title: title,
+    taskManager.addTask(id: UUID(),
+                        priority: "Low",
+                        title: title,
+                        notes: "This a task",
+                        reminderDate: nil,
                         deadline: nil)
   }
   
@@ -29,7 +33,7 @@ class CoreDataTests: XCTestCase {
     taskManager = TaskManager(viewContext: coreDataStack.viewContext)
     addTask()
   }
-  
+
   func testTaskAdded() {
     guard let task = getTask() else { return XCTFail() }
     XCTAssertEqual("Task 1", task.title)
@@ -41,14 +45,66 @@ class CoreDataTests: XCTestCase {
     XCTAssertNil(task.deadline_)
     
     let date = Date()
-    taskManager.updateTask(task, title: "Updated task", deadline: date)
+    taskManager.updateTask(task,
+                           priority: "High",
+                           title: "Updated task",
+                           notes: "New notes",
+                           deadline: nil,
+                           reminderDate: date)
     
     XCTAssertEqual("Updated task", task.title)
-    XCTAssertEqual(date, task.deadline_!)
+    XCTAssertEqual(date, task.reminderDate_!)
     
     // Verify additional tasks were not added by error
     let tasks = taskManager.getTasks()
     XCTAssertEqual(tasks.count, 1)
+  }
+  
+  func testTaskCompletionUpdated() {
+    guard let task = getTask() else { return XCTFail() }
+    let date = Date()
+    
+    XCTAssertNil(task.dateCompleted_)
+    XCTAssertFalse(task.taskCompleted)
+    
+    taskManager.updateTaskCompletion(for: task, to: true) // Task marked completed
+    
+    XCTAssertEqual(date.deadlineFormat, task.dateCompleted_!.deadlineFormat)
+    XCTAssertTrue(task.taskCompleted)
+
+    taskManager.updateTaskCompletion(for: task, to: false) // Task marked incomplete, reset
+
+    XCTAssertNil(task.dateCompleted_)
+    XCTAssertFalse(task.taskCompleted)
+  }
+  
+  func testReminderCanceledWhenTaskCompletionChanged() {
+    guard let task = getTask() else { return XCTFail() }
+    let date = Date()
+    
+    taskManager.updateTask(task,
+                           priority: "High",
+                           title: "Updated task",
+                           notes: "New notes",
+                           deadline: nil,
+                           reminderDate: date)
+    
+    XCTAssertEqual(date, task.reminderDate_)
+    
+    taskManager.updateTaskCompletion(for: task, to: true) // Task marked completed
+    
+    XCTAssertNil(task.reminderDate_)
+
+    taskManager.updateTask(task,
+                           priority: "High",
+                           title: "Updated task",
+                           notes: "New notes",
+                           deadline: nil,
+                           reminderDate: date)
+    
+    taskManager.updateTaskCompletion(for: task, to: false) // Task marked incomplete, reset
+    
+    XCTAssertNil(task.reminderDate_)
   }
   
   func testTaskDeleted() {
