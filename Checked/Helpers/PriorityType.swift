@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PriorityType: Int, Codable {
+enum PriorityType: Int, Codable, CaseIterable {
   case low
   case medium
   case high
@@ -21,5 +21,11 @@ enum PriorityType: Int, Codable {
     case .high:
       return "High"
     }
+  }
+}
+
+extension PriorityType: Identifiable {
+  var id: String {
+    return self.text
   }
 }

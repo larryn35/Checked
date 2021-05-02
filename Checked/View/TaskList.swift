@@ -65,6 +65,7 @@ struct TaskList: View {
                   modalType = .update(task)
                 }, deleteTask: {
                   vm.deleteTask(task: task)
+                  vm.getTasks()
                 }, task: task)
               }
             }

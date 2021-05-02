@@ -23,9 +23,9 @@ enum ModalType: Identifiable, View {
   var body: some View {
     switch self {
     case .newTask:
-      return Text("New task")
+      return TaskForm(formVM: TaskFormViewModel())
     case .update(let task):
-      return Text("Update \(task.title)")
+      return TaskForm(formVM: TaskFormViewModel(task))
     }
   }
 }

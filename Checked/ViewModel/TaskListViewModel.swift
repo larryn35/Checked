@@ -23,19 +23,6 @@ final class TaskListViewModel: ObservableObject {
     tasks = taskManager.getTasks()
   }
   
-  func addTask() {
-    guard !title.isEmpty else { return }
-    var taskDeadline: Date? = nil
-    
-    if showDatePicker {
-      taskDeadline = deadline
-    }
-    
-    taskManager.addTask(title: title, deadline: taskDeadline)
-    title = ""
-    showDatePicker = false
-  }
-  
   func deleteTask(task: Task) {
     taskManager.deleteTask(task)
   }
