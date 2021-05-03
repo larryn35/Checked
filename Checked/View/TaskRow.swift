@@ -19,12 +19,11 @@ struct TaskRow: View {
   @State private var editButtonTapped = false
   @State private var deleteButtonTapped = false
   
-  
   var taskChecked: TaskCheckedHandler
   var editTask: EditTaskHandler
   var deleteTask: DeleteTaskHandler
   
-    // MARK: - Body
+  // MARK: - Body
   var body: some View {
     HStack(spacing: 10) {
       
@@ -36,6 +35,9 @@ struct TaskRow: View {
           taskChecked()
         }
       }
+      .buttonStyle(RotateAnimationStyle(bindingBool: $checkButtonTapped,
+                                        sfSymbol: .checkmark,
+                                        fgColor: vm.checkBoxColor))
       
       // MARK: Task title/deadline
       VStack(alignment: .leading) {
@@ -54,26 +56,30 @@ struct TaskRow: View {
       
       if showButtons {
         // MARK:  Edit task button
-        Button("edit") {
+        Button("Edit task") {
           withAnimation { editButtonTapped.toggle() }
-
+          
           DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             editButtonTapped = false
             editTask()
           }
         }
+        .buttonStyle(CircleFillAnimationStyle(bindingBool: $editButtonTapped,
+                                              sfSymbol: .pencil))
         .padding(.horizontal, 8)
         
         // MARK:  Delete task button
-        Button("delete") {
-
+        Button("Delete task") {
+          
           withAnimation { deleteButtonTapped.toggle() }
-
+          
           DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             deleteButtonTapped = false
             deleteTask()
           }
         }
+        .buttonStyle(CircleFillAnimationStyle(bindingBool: $deleteButtonTapped,
+                                              sfSymbol: .trash))
       }
       
       // MARK: Deadline button
@@ -81,6 +87,7 @@ struct TaskRow: View {
         Button("deadline") {
           withAnimation { vm.showDeadline.toggle() }
         }
+        .buttonStyle(CalendarAnimationStyle(bindingBool: $vm.showDeadline))
       }
     }
     .padding()

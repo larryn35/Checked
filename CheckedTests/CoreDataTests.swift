@@ -69,7 +69,7 @@ class CoreDataTests: XCTestCase {
     
     taskManager.updateTaskCompletion(for: task, to: true) // Task marked completed
     
-    XCTAssertEqual(date.deadlineFormat, task.dateCompleted_!.deadlineFormat)
+    XCTAssertEqual(date.fullDeadlineFormat, task.dateCompleted_!.fullDeadlineFormat)
     XCTAssertTrue(task.taskCompleted)
 
     taskManager.updateTaskCompletion(for: task, to: false) // Task marked incomplete, reset
