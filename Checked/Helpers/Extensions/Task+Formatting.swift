@@ -8,6 +8,11 @@
 import Foundation
 
 extension Task {
+  var uuid: String {
+    guard let id = id_ else { return UUID().uuidString }
+    return id.uuidString
+  }
+  
   var title: String {
     title_ ?? "Task"
   }
@@ -38,7 +43,8 @@ extension Task {
   }
   
   var reminderSet: Bool {
-    reminderDate_ != nil
+    guard let reminder = reminderDate_ else { return false }
+    return reminder > Date() 
   }
   
   var deadline: Date {

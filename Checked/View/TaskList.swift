@@ -71,15 +71,19 @@ struct TaskList: View {
             ScrollView {
               VStack(spacing: 10) {
                 ForEach(vm.taskList) { task in
-                  TaskRow(taskChecked: {
+                  TaskRow(
+                    taskChecked: {
                     vm.updateTaskCompletion(for: task)
-                    vm.getTasks()
-                  }, editTask: {
-                    modalType = .update(task)
-                  }, deleteTask: {
+                    vm.getTasks()},
+                    
+                    editTask: {
+                    modalType = .update(task)},
+                    
+                    deleteTask: {
                     vm.deleteTask(task: task)
-                    vm.getTasks()
-                  }, task: task)
+                    vm.getTasks()},
+                    
+                    task: task)
                 }
               }
             }
@@ -110,6 +114,7 @@ struct TaskList: View {
     }
     .onAppear {
       vm.getTasks()
+      NotificationManager().removeBadge()
     }
   }
 }

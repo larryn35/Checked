@@ -20,7 +20,9 @@ final class TaskFormViewModel: ObservableObject {
   @Published var dateCompleted: Date? = nil
   @Published var showSaveButton = false
   
+  let notificationManager = NotificationManager()
   var taskManager: TaskManagerProtocol
+  
   var currentTask: Task?
   var newTaskID = UUID()
   
@@ -124,6 +126,19 @@ final class TaskFormViewModel: ObservableObject {
 
 extension TaskFormViewModel {
 
+  func setupNotification() {
+    if showReminderPicker {
+      notificationManager.sendNotification(id: currentTask?.uuid ?? newTaskID.uuidString,
+                                           body: title,
+                                           triggerDate: reminderDate)
+      
+      // Remove any previously set reminders
+    } else if let currentTask = currentTask {
+      notificationManager.removeNotification(id: currentTask.uuid)
+    }
+  }
+  
+  
   func updateToDo() {
     let optionalDeadline: Date? = showDeadlinePicker ? deadline : nil
     let optionalReminder: Date? = showReminderPicker ? reminderDate : nil
@@ -135,6 +150,8 @@ extension TaskFormViewModel {
                            notes: notes,
                            deadline: optionalDeadline,
                            reminderDate: optionalReminder)
+    
+    setupNotification()
   }
   
   func addToDo() {
@@ -147,10 +164,13 @@ extension TaskFormViewModel {
                         notes: notes,
                         reminderDate: optionalReminder,
                         deadline: optionalDeadline)
+    
+    setupNotification()
   }
   
   func deleteToDo() {
     guard let currentTask = currentTask else { return }
     taskManager.deleteTask(currentTask)
+    notificationManager.removeNotification(id: currentTask.uuid)
   }
 }

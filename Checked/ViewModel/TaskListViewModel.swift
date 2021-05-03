@@ -15,6 +15,7 @@ final class TaskListViewModel: ObservableObject {
   @Published var filterType: FilterType = .incomplete
   @Published var sortType: SortType = .dateCreated
   
+  let notificationManager = NotificationManager()
   let taskManager: TaskManagerProtocol
   
   init(taskManager: TaskManagerProtocol = TaskManager()) {
@@ -100,10 +101,12 @@ extension TaskListViewModel {
   
   func updateTaskCompletion(for task: Task) {
     let change = !task.taskCompleted
+    notificationManager.removeNotification(id: task.uuid)
     taskManager.updateTaskCompletion(for: task, to: change)
   }
   
   func deleteTask(task: Task) {
+    notificationManager.removeNotification(id: task.uuid)
     taskManager.deleteTask(task)
   }
 }
