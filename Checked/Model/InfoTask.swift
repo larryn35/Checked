@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct InfoTask {
+struct InfoTask: Hashable {
   let title: String
   var priority: PriorityType = .low
   var deadline: String = ""
@@ -15,7 +15,7 @@ struct InfoTask {
   var reminderSet: Bool = false
   var overDue: Bool = false
   
-  static let guides = [
+  static let guides: [InfoTask] = [
   
     InfoTask(title: "Low priority tasks have a blue checkbox"),
     InfoTask(title: "Medium priority tasks have an orange checkbox",

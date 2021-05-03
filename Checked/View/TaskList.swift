@@ -11,87 +11,102 @@ struct TaskList: View {
   @AppStorage("username") var username: String = ""
   @StateObject private var vm = TaskListViewModel()
   @State private var modalType: ModalType? = nil
+  @State private var showInfo = false
   
   var body: some View {
-    ViewLayout(backgroundImage: Constants.gradientHome) {
-      
-      // MARK:  Header
-      ZStack(alignment: .topTrailing) {
-        VStack(alignment: .leading) {
-          
-          // Text header
-          Text("Hello, \(username)")
-            .font(.largeTitle)
-            .fontWeight(.semibold)
-            .foregroundColor(.white)
-          Text("Reach for the stars, so if you fall, you land on a cloud")
-            .font(.caption)
-            .fontWeight(.semibold)
-            .foregroundColor(.white)
-          
-          Spacer().frame(height: 20)
-          
-          // Task overview
-          summarySubview
-        }
-      }
-      
-      // MARK: Body
-    } content: {
-      ZStack(alignment: .bottom) {
-        VStack(spacing: 16) {
-          VStack(alignment: .leading, spacing: 10) {
-            
-            // Filter buttons
-            filterButtonsSubview
-            
-            // Sort button
-            Button {
-              // Sort list by deadline, priority, date created
-              vm.changeSort()
-            } label: {
-              Label("Sorted by: \(vm.sortType.rawValue)", systemImage: "arrow.up.arrow.down") // Change text based on sort type
-                .font(.caption)
-                .foregroundColor(Constants.textColor)
-            }
-            .accentColor(Constants.textColor)
-          }
-          
-          // Task list
-          ScrollView {
-            VStack(spacing: 10) {
-              ForEach(vm.taskList) { task in
-                TaskRow(taskChecked: {
-                  vm.updateTaskCompletion(for: task)
-                  vm.getTasks()
-                }, editTask: {
-                  modalType = .update(task)
-                }, deleteTask: {
-                  vm.deleteTask(task: task)
-                  vm.getTasks()
-                }, task: task)
-              }
+    ZStack(alignment: .top) {
+      ViewLayout(backgroundImage: Constants.gradientHome) {
+        
+        // MARK:  Header
+        ZStack(alignment: .topTrailing) {
+          Button("Info") {
+            withAnimation {
+              showInfo.toggle()
             }
           }
-          .frame(maxHeight: .infinity, alignment: .top)
+          .buttonStyle(CircleFillAnimationStyle(bindingBool: $showInfo,
+                                                sfSymbol: .info))
+          
+          VStack(alignment: .leading) {
+            
+            // Text header
+            Text("Hello, \(username)")
+              .font(.largeTitle)
+              .fontWeight(.semibold)
+              .foregroundColor(.white)
+            Text("Reach for the stars, so if you fall, you land on a cloud")
+              .font(.caption)
+              .fontWeight(.semibold)
+              .foregroundColor(.white)
+            
+            Spacer().frame(height: 20)
+            
+            // Task overview
+            summarySubview
+          }
         }
         
-        // Add button
-        Button {
-          withAnimation {
-            modalType = .newTask
+        // MARK: Body
+      } content: {
+        ZStack(alignment: .bottom) {
+          VStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 10) {
+              
+              // Filter buttons
+              filterButtonsSubview
+              
+              // Sort button
+              Button {
+                // Sort list by deadline, priority, date created
+                vm.changeSort()
+              } label: {
+                Label("Sorted by: \(vm.sortType.rawValue)", systemImage: "arrow.up.arrow.down") // Change text based on sort type
+                  .font(.caption)
+                  .foregroundColor(Constants.textColor)
+              }
+              .accentColor(Constants.textColor)
+            }
+            
+            // Task list
+            ScrollView {
+              VStack(spacing: 10) {
+                ForEach(vm.taskList) { task in
+                  TaskRow(taskChecked: {
+                    vm.updateTaskCompletion(for: task)
+                    vm.getTasks()
+                  }, editTask: {
+                    modalType = .update(task)
+                  }, deleteTask: {
+                    vm.deleteTask(task: task)
+                    vm.getTasks()
+                  }, task: task)
+                }
+              }
+            }
+            .frame(maxHeight: .infinity, alignment: .top)
           }
-        } label: {
-          Constants.addButton
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 70, height: 70, alignment: .center)
-            .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 5)
+          
+          // Add button
+          Button {
+            withAnimation {
+              modalType = .newTask
+            }
+          } label: {
+            Constants.addButton
+              .resizable()
+          }
+          .buttonStyle(OffsetAnimationStyle())
         }
+        
+        // Present sheet
+        .fullScreenCover(item: $modalType, onDismiss: vm.getTasks) { $0 }
       }
       
-      // Present sheet
-      .fullScreenCover(item: $modalType, onDismiss: vm.getTasks) { $0 }
+      if showInfo {
+        InfoView(showInfo: $showInfo)
+          .transition(.move(edge: .bottom))
+      }
+      
     }
     .onAppear {
       vm.getTasks()

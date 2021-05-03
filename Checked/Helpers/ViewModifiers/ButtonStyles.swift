@@ -116,17 +116,20 @@ struct CircleFillAnimationStyle: ButtonStyle {
   }
 }
 
-/// Offset and scales button on press
+/// For info and add buttons. Offset and scales button on press
 struct OffsetAnimationStyle: ButtonStyle {
-  let size: CGFloat = 20
+  
+  var size: CGFloat = 70
   let offset: CGFloat = -3
   
   func makeBody(configuration: Self.Configuration) -> some View {
     return configuration.label
+      .aspectRatio(contentMode: .fit)
       .frame(width: size, height: size, alignment: .center)
       .offset(y: configuration.isPressed ? offset : 0)
       .scaleEffect(configuration.isPressed ? 1.1 : 1)
       .opacity(configuration.isPressed ? 0.8 : 1)
       .animation(.spring())
+      .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 5)
   }
 }

@@ -35,7 +35,7 @@ final class TaskRowViewModel: ObservableObject {
   init(infoTask: InfoTask) {
     taskTitle = infoTask.title
     taskPriority = infoTask.priority
-    taskCompleted = true
+    taskCompleted = false
     deadlineSet = infoTask.deadlineSet
     taskDeadline = infoTask.deadline
     taskOverDue = infoTask.overDue
@@ -44,7 +44,7 @@ final class TaskRowViewModel: ObservableObject {
   }
   
   var rowText: String {
-    showDeadline ? taskDeadline : taskTitle
+    showDeadline ? "Due: \(taskDeadline)" : taskTitle
   }
   
   var lineLimit: Int {
@@ -56,7 +56,7 @@ final class TaskRowViewModel: ObservableObject {
   }
   
   var font: Font {
-    infoView ? .caption : .headline
+    infoView ? .caption : .body
   }
   
   var checkBoxColor: Color {
