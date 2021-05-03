@@ -16,6 +16,8 @@ struct TaskForm: View {
   @State private var cancelButtonPressed: Bool = false
   @State private var saveButtonPressed: Bool = false
   
+  let hapticsManager = HapticsManager()
+  
   var body: some View {
     ViewLayout(backgroundImage: formVM.backgroundImage) {
       
@@ -34,6 +36,8 @@ struct TaskForm: View {
         HStack {
           ForEach(PriorityType.allCases) { status in
             Button {
+              hapticsManager.impact(style: .soft)
+
               formVM.priority = status
             } label: {
               Text(status.text)
@@ -134,7 +138,8 @@ extension TaskForm {
   private var cancelButton: some View {
     VStack(spacing: 5) {
       Button("cancel") {
-        
+        hapticsManager.impact(style: .light)
+
         withAnimation { cancelButtonPressed.toggle() }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
@@ -153,7 +158,8 @@ extension TaskForm {
   private var saveButton: some View {
     VStack(spacing: 5) {
       Button("save") {
-        
+        hapticsManager.notification(type: .success)
+
         withAnimation { saveButtonPressed.toggle() }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {

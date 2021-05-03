@@ -23,13 +23,22 @@ struct TaskRow: View {
   var editTask: EditTaskHandler
   var deleteTask: DeleteTaskHandler
   
+  let hapticsManager = HapticsManager()
+  
   // MARK: - Body
   var body: some View {
     HStack(spacing: 10) {
       
       // MARK: Task completion button
       Button("Check") {
+        if checkButtonTapped == false {
+          hapticsManager.notification(type: .success)
+        } else {
+          hapticsManager.impact(style: .light)
+        }
+        
         withAnimation { checkButtonTapped.toggle() }
+        
         
         DispatchQueue.main.asyncAfter(deadline: .now()+0.6) {
           taskChecked()
@@ -57,6 +66,8 @@ struct TaskRow: View {
       if showButtons {
         // MARK:  Edit task button
         Button("Edit task") {
+          hapticsManager.impact(style: .light)
+          
           withAnimation { editButtonTapped.toggle() }
           
           DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -70,7 +81,8 @@ struct TaskRow: View {
         
         // MARK:  Delete task button
         Button("Delete task") {
-          
+          hapticsManager.notification(type: .success)
+
           withAnimation { deleteButtonTapped.toggle() }
           
           DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

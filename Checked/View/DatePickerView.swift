@@ -12,6 +12,8 @@ struct DatePickerView: View {
   var text: String
   var date: Binding<Date>
   
+  let hapticsManager = HapticsManager()
+  
   var body: some View {
     HStack(alignment: .top) {
       VStack(alignment: .leading) {
@@ -31,6 +33,8 @@ struct DatePickerView: View {
       
       Button("Set Deadline") {        
         withAnimation {
+          hapticsManager.impact(style: .soft)
+
           showDatePicker.wrappedValue.toggle()
         }
       }

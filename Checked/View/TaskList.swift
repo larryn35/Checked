@@ -13,6 +13,8 @@ struct TaskList: View {
   @State private var modalType: ModalType? = nil
   @State private var showInfo = false
   
+  let hapticsManager = HapticsManager()
+  
   var body: some View {
     ZStack(alignment: .top) {
       ViewLayout(backgroundImage: Constants.gradientHome) {
@@ -20,9 +22,9 @@ struct TaskList: View {
         // MARK:  Header
         ZStack(alignment: .topTrailing) {
           Button("Info") {
-            withAnimation {
-              showInfo.toggle()
-            }
+            hapticsManager.impact(style: .soft)
+            
+            withAnimation { showInfo.toggle() }
           }
           .buttonStyle(CircleFillAnimationStyle(bindingBool: $showInfo,
                                                 sfSymbol: .info))
@@ -57,6 +59,8 @@ struct TaskList: View {
               
               // Sort button
               Button {
+                hapticsManager.impact(style: .soft)
+
                 // Sort list by deadline, priority, date created
                 vm.changeSort()
               } label: {
@@ -92,9 +96,9 @@ struct TaskList: View {
           
           // Add button
           Button {
-            withAnimation {
-              modalType = .newTask
-            }
+            hapticsManager.impact(style: .light)
+            
+            withAnimation { modalType = .newTask }
           } label: {
             Constants.addButton
               .resizable()
@@ -127,10 +131,10 @@ extension TaskList {
       HStack(spacing: 20) {
         ForEach(FilterType.allCases) { type in
           Button {
-            withAnimation {
-              // Change filter type
-              vm.changeFilter(to: type)
-            }
+            hapticsManager.impact(style: .soft)
+
+            // Change filter type
+            withAnimation { vm.changeFilter(to: type) }
           } label: {
             Text(type.rawValue)
               .font(.subheadline)
