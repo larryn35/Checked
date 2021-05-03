@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import WidgetKit
 
 protocol TaskManagerProtocol {
   func getTasks() -> [Task]
@@ -82,10 +83,13 @@ final class TaskManager: TaskManagerProtocol {
   func deleteTask(_ task: Task) {
     viewContext.delete(task)
     save()
+    
   }
   
   private func save() {
     PersistenceController.shared.save()
+
+    WidgetCenter.shared.reloadAllTimelines()
   }
 }
 
