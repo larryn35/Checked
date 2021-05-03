@@ -37,6 +37,7 @@
 		5CFA1EBC263F4AE800E83A46 /* Array+Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1EBB263F4AE800E83A46 /* Array+Task.swift */; };
 		5CFA1EBE263F540D00E83A46 /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1EBD263F540C00E83A46 /* SortType.swift */; };
 		5CFA1EC0263F751E00E83A46 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1EBF263F751E00E83A46 /* ButtonStyles.swift */; };
+		5CFA1EC4263F88D500E83A46 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1EC3263F88D500E83A46 /* InfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		5CFA1EBB263F4AE800E83A46 /* Array+Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Task.swift"; sourceTree = "<group>"; };
 		5CFA1EBD263F540C00E83A46 /* SortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortType.swift; sourceTree = "<group>"; };
 		5CFA1EBF263F751E00E83A46 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		5CFA1EC3263F88D500E83A46 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 			children = (
 				5C16F7E3263B78700087C325 /* TaskList.swift */,
 				5C24B143263CFDD700773D9E /* TaskRow.swift */,
+				5CFA1EC3263F88D500E83A46 /* InfoView.swift */,
 				5C35104E263E701D008EFBF0 /* TaskForm.swift */,
 				5C351052263E7899008EFBF0 /* DatePickerView.swift */,
 				5C24B138263CEEBC00773D9E /* ViewLayout.swift */,
@@ -437,6 +440,7 @@
 				5C24B14E263D313C00773D9E /* InfoTask.swift in Sources */,
 				5C24B140263CF47200773D9E /* FilterType.swift in Sources */,
 				5CFA1EBC263F4AE800E83A46 /* Array+Task.swift in Sources */,
+				5CFA1EC4263F88D500E83A46 /* InfoView.swift in Sources */,
 				5C351051263E7069008EFBF0 /* TaskFormViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

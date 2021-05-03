@@ -38,8 +38,9 @@ struct TaskForm: View {
             } label: {
               Text(status.text)
                 .font(.caption)
+                .padding(.vertical, 8)
                 .foregroundColor(Constants.prioritiyColors[status.rawValue])
-                .frame(width: 70, height: 20)
+                .frame(width: 70)
                 .background(
                   RoundedRectangle(cornerRadius: 10)
                     .fill(Constants.priorityBGColors[status.rawValue])
@@ -63,8 +64,8 @@ struct TaskForm: View {
             .font(.subheadline)
             .fontWeight(.semibold)
           
-          TextField(formVM.title, text: $formVM.title)
-            .textFieldStyle(RoundedBorderTextFieldStyle())
+          TextField(formVM.placeholderText, text: $formVM.title)
+            .modifier(CustomTextFieldModifier())
         }
         
         // Edit task note
@@ -90,9 +91,9 @@ struct TaskForm: View {
             keyBoardDisplayed = status
           }
           
-          TextField(formVM.notes, text: $formVM.notes)
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-
+          TextEditor(text: $formVM.notes)
+            .modifier(CustomTextFieldModifier())
+            .frame(minHeight: 20, maxHeight: 120)
         }
         
         if !formVM.taskCompleted {

@@ -59,3 +59,16 @@ struct RoundedRectangleWithStrokeStyle: ViewModifier {
       )
   }
 }
+
+/// Clears textfield background color and adds rounded rectangle style
+struct CustomTextFieldModifier: ViewModifier {
+  init() {
+    UITextView.appearance().backgroundColor = .clear
+  }
+  
+  func body(content: Content) -> some View {
+    content
+      .padding(8)
+      .modifier(RoundedRectangleWithStrokeStyle())
+  }
+}

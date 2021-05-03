@@ -81,6 +81,10 @@ final class TaskFormViewModel: ObservableObject {
     updating ? "Edit task" : "Add new task"
   }
   
+  var placeholderText: String {
+    title.isEmpty ? "Add task" : title
+  }
+  
   var deadlineText: String {
     guard showDeadlinePicker else { return "Set deadline" }
     
