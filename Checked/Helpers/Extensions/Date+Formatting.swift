@@ -8,10 +8,17 @@
 import Foundation
 
 extension Date {
-  //  date and time: Saturday, May 1, 2021 @ 3:12 AM
-  var deadlineFormat: String {
+  //  day of the week, date, and time: Saturday, 05/01/21 @ 3:12 AM
+  var fullDeadlineFormat: String {
     let formatter = DateFormatter()
-    formatter.dateFormat = "EEEE, MMM d, yyyy @ h:mm a"
+    formatter.dateFormat = "EEEE, MM/dd/yy @ h:mm a"
+    return formatter.string(from: self)
+  }
+  
+  // date and time: 05/01/21 @ 3:12 AM
+  var shortDeadlineFormat: String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MM/dd/yy @ h:mm a"
     return formatter.string(from: self)
   }
   

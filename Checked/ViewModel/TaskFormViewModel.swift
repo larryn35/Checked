@@ -27,13 +27,13 @@ final class TaskFormViewModel: ObservableObject {
   // Setup new task
   init(taskManager: TaskManagerProtocol = TaskManager()) {
     self.taskManager = taskManager
-    dateCreated = Date().deadlineFormat
+    dateCreated = Date().fullDeadlineFormat
   }
   
   // Setup current task update
   init(_ currentTask: Task, taskManager: TaskManagerProtocol = TaskManager()) {
     self.currentTask = currentTask
-    self.dateCreated = currentTask.dateCreated.deadlineFormat
+    self.dateCreated = currentTask.dateCreated.fullDeadlineFormat
     self.title = currentTask.title
     self.taskCompleted = currentTask.taskCompleted
     self.notes = currentTask.notes
@@ -114,13 +114,13 @@ final class TaskFormViewModel: ObservableObject {
   }
   
   var dateCompletedText: String {
-    return dateCompleted?.deadlineFormat ?? Date().deadlineFormat
+    return dateCompleted?.fullDeadlineFormat ?? Date().fullDeadlineFormat
   }
 }
 
 extension TaskFormViewModel {
 
-  func updateToDo(completion: () -> Void) {
+  func updateToDo() {
     let optionalDeadline: Date? = showDeadlinePicker ? deadline : nil
     let optionalReminder: Date? = showReminderPicker ? reminderDate : nil
     let priority = priority.text
@@ -131,11 +131,9 @@ extension TaskFormViewModel {
                            notes: notes,
                            deadline: optionalDeadline,
                            reminderDate: optionalReminder)
-    
-    completion()
   }
   
-  func addToDo(completion: () -> Void) {
+  func addToDo() {
     let optionalDeadline: Date? = showDeadlinePicker ? deadline : nil
     let optionalReminder: Date? = showReminderPicker ? reminderDate : nil
     
@@ -145,14 +143,10 @@ extension TaskFormViewModel {
                         notes: notes,
                         reminderDate: optionalReminder,
                         deadline: optionalDeadline)
-
-    completion()
   }
   
-  func deleteToDo(completion: () -> Void) {
+  func deleteToDo() {
     guard let currentTask = currentTask else { return }
     taskManager.deleteTask(currentTask)
-
-    completion()
   }
 }

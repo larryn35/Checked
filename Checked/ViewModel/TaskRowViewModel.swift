@@ -25,7 +25,7 @@ final class TaskRowViewModel: ObservableObject {
     taskPriority = task.priorityStatus
     taskCompleted = task.taskCompleted
     deadlineSet = task.deadlineSet
-    taskDeadline = task.deadline.deadlineFormat
+    taskDeadline = task.deadline.shortDeadlineFormat
     taskOverDue = task.overdue
     reminderSet = task.reminderSet
     infoView = false
@@ -57,5 +57,9 @@ final class TaskRowViewModel: ObservableObject {
   
   var font: Font {
     infoView ? .caption : .headline
+  }
+  
+  var checkBoxColor: Color {
+    Constants.prioritiyColors[taskPriority.rawValue]
   }
 }

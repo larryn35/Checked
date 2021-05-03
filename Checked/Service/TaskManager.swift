@@ -41,6 +41,7 @@ final class TaskManager: TaskManagerProtocol {
     
     let newTask = Task(context: viewContext)
     newTask.id_ = id
+    newTask.dateCreated_ = Date()
     newTask.priority_ = priority
     newTask.title_ = title
     newTask.notes_ = notes
