@@ -24,6 +24,7 @@ struct TaskForm: View {
         .font(.largeTitle)
         .fontWeight(.semibold)
         .foregroundColor(.white)
+        .opacity(keyBoardDisplayed ? 0.1 : 1)
       
       // MARK: - Body
     } content: {
@@ -37,6 +38,14 @@ struct TaskForm: View {
             } label: {
               Text(status.text)
                 .font(.caption)
+                .foregroundColor(Constants.prioritiyColors[status.rawValue])
+                .frame(width: 70, height: 20)
+                .background(
+                  RoundedRectangle(cornerRadius: 10)
+                    .fill(Constants.priorityBGColors[status.rawValue])
+                    .overlay(RoundedRectangle(cornerRadius: 10)
+                              .stroke(Constants.prioritiyColors[status.rawValue], lineWidth: 0.5))
+                )
                 .opacity(formVM.priority == status ? 1 : 0.3)
             }
           }
@@ -146,13 +155,11 @@ extension TaskForm {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
           if formVM.updating {
-            formVM.updateToDo {
-              presentationMode.wrappedValue.dismiss()
-            }
+            formVM.updateToDo()
+            presentationMode.wrappedValue.dismiss()
           } else {
-            formVM.addToDo {
-              presentationMode.wrappedValue.dismiss()
-            }
+            formVM.addToDo()
+            presentationMode.wrappedValue.dismiss()
           }
         }
       }

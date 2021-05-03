@@ -63,6 +63,7 @@ struct TaskList: View {
               ForEach(vm.taskList) { task in
                 TaskRow(taskChecked: {
                   vm.updateTaskCompletion(for: task)
+                  vm.getTasks()
                 }, editTask: {
                   modalType = .update(task)
                 }, deleteTask: {
