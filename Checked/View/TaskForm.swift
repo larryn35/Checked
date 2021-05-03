@@ -141,6 +141,8 @@ extension TaskForm {
           presentationMode.wrappedValue.dismiss()
         }
       }
+      .buttonStyle(RotateAnimationStyle(bindingBool: $cancelButtonPressed,
+                                        sfSymbol: .xmark))
       
       Text("cancel")
         .foregroundColor(Constants.textColor)
@@ -164,6 +166,8 @@ extension TaskForm {
           }
         }
       }
+      .buttonStyle(CircleFillAnimationStyle(bindingBool: $saveButtonPressed,
+                                            sfSymbol: .folder))
       .disabled(formVM.isDisabled)
       
       Text("save")

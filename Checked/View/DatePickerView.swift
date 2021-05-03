@@ -34,6 +34,7 @@ struct DatePickerView: View {
           showDatePicker.wrappedValue.toggle()
         }
       }
+      .buttonStyle(CalendarAnimationStyle(bindingBool: showDatePicker))
     }
   }
 }
