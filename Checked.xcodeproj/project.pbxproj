@@ -42,6 +42,7 @@
 		5C5307D0263B572000F6E59A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307CF263B572000F6E59A /* Persistence.swift */; };
 		5C5307DE263B572100F6E59A /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307DD263B572100F6E59A /* CoreDataTests.swift */; };
 		5C5307E9263B572100F6E59A /* CheckedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307E8263B572100F6E59A /* CheckedUITests.swift */; };
+		5C5F6D4F26432AB00001F98B /* TaskFormViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F6D4E26432AB00001F98B /* TaskFormViewModelTests.swift */; };
 		5C897CAF26411C1C000CC9C5 /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C897CAD26411BC7000CC9C5 /* MediumWidgetView.swift */; };
 		5C897CB226412157000CC9C5 /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C897CB02641210D000CC9C5 /* SmallWidgetView.swift */; };
 		5C897CB526412636000CC9C5 /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C897CB32641261E000CC9C5 /* LargeWidgetView.swift */; };
@@ -141,6 +142,7 @@
 		5C5307E4263B572100F6E59A /* CheckedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5307E8263B572100F6E59A /* CheckedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedUITests.swift; sourceTree = "<group>"; };
 		5C5307EA263B572100F6E59A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C5F6D4E26432AB00001F98B /* TaskFormViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFormViewModelTests.swift; sourceTree = "<group>"; };
 		5C897CAD26411BC7000CC9C5 /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
 		5C897CB02641210D000CC9C5 /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
 		5C897CB32641261E000CC9C5 /* LargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetView.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				5C24B130263CDDDC00773D9E /* CoreDataTestStack.swift */,
 				5C5307DD263B572100F6E59A /* CoreDataTests.swift */,
 				5C1F4F9B264276800029042F /* TaskListViewModelTests.swift */,
+				5C5F6D4E26432AB00001F98B /* TaskFormViewModelTests.swift */,
 				5C5307DF263B572100F6E59A /* Info.plist */,
 			);
 			path = CheckedTests;
@@ -607,6 +610,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C1F4F9C264276800029042F /* TaskListViewModelTests.swift in Sources */,
+				5C5F6D4F26432AB00001F98B /* TaskFormViewModelTests.swift in Sources */,
 				5C5307DE263B572100F6E59A /* CoreDataTests.swift in Sources */,
 				5C24B131263CDDDC00773D9E /* CoreDataTestStack.swift in Sources */,
 			);
