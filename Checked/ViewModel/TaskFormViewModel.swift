@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+enum FormErrorType: String {
+  case deadlinePassed = "Deadline has passed"
+  case reminderPassed = "Reminder has passed"
+  case invalidTitle = "Task name cannot be blank"
+}
+
 final class TaskFormViewModel: ObservableObject {
   
   @Published var title = ""
@@ -19,12 +25,17 @@ final class TaskFormViewModel: ObservableObject {
   @Published var priority: PriorityType = .low
   @Published var dateCompleted: Date? = nil
   @Published var showSaveButton = false
+  @Published var formError: FormErrorType? = nil
+  @Published var showErrorMessage = false
+  
+  var errorMessage = ""
   
   let notificationManager = NotificationManager()
   var taskManager: TaskManagerProtocol
   
   var currentTask: Task?
-  var newTaskID = UUID()
+  let dateCreated: String
+  let newTaskID = UUID()
   
   // Setup new task
   init(taskManager: TaskManagerProtocol = TaskManager()) {
@@ -62,8 +73,10 @@ final class TaskFormViewModel: ObservableObject {
     
     self.taskManager = taskManager
   }
-  
-  let dateCreated: String
+}
+
+// MARK: - Variables
+extension TaskFormViewModel {
   
   var updating: Bool {
     currentTask != nil
@@ -71,12 +84,6 @@ final class TaskFormViewModel: ObservableObject {
   
   var backgroundImage: Image {
     updating ? Constants.gradientUpdate : Constants.gradientAdd
-  }
-  
-  var isDisabled: Bool {
-    title.isEmpty ||
-      (!taskCompleted && deadline < Date()) ||
-      (showReminderPicker && reminderDate < Date())
   }
   
   var formTitle: String {
@@ -124,6 +131,8 @@ final class TaskFormViewModel: ObservableObject {
   }
 }
 
+
+// MARK: - Functions
 extension TaskFormViewModel {
 
   func setupNotification() {
@@ -138,6 +147,26 @@ extension TaskFormViewModel {
     }
   }
   
+  func validateForm() {
+    
+    if title.isEmpty {
+      formError = .invalidTitle
+    } else if (!taskCompleted && showDeadlinePicker && deadline < Date()) {
+      formError = .deadlinePassed
+    } else if (showReminderPicker && reminderDate < Date()) {
+      formError = .reminderPassed
+    } else {
+      formError = nil
+    }
+    
+    if formError != nil {
+      withAnimation { showErrorMessage = true }
+      
+      DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+        withAnimation { self?.showErrorMessage = false }
+      }
+    }
+  }
   
   func updateToDo() {
     let optionalDeadline: Date? = showDeadlinePicker ? deadline : nil
