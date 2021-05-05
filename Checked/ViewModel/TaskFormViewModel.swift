@@ -173,6 +173,8 @@ extension TaskFormViewModel {
       DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
         withAnimation { self?.showErrorMessage = false }
       }
+    } else {
+      showErrorMessage = false
     }
   }
   
