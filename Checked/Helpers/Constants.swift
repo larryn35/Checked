@@ -37,4 +37,7 @@ struct Constants {
   
   static let hour: Double = 60*60
   static let week: Double = 60*60*24*7
+    
+  // MARK: - Widget
+  static let widgetBG = Image("widgetBG")
 }

@@ -19,27 +19,15 @@ struct TaskEntry: TimelineEntry {
 }
 
 struct Provider: TimelineProvider {
+  
+  // Shown while data is loading, can be redacted
   func placeholder(in context: Context) -> TaskEntry {
-    TaskEntry(tasks: [WidgetTask.preview])
+    TaskEntry(tasks: WidgetTask.mockData)
   }
   
+  // Returns a timeline object that will be displayed in the widget gallery
   func getSnapshot(in context: Context, completion: @escaping (TaskEntry) -> ()) {
-    var tasks: [Task] {
-      let request: NSFetchRequest<Task> = Task.fetchRequest()
-      do {
-        return try PersistenceController.shared.viewContext.fetch(request)
-      } catch {
-        return []
-      }
-    }
-    
-    var widgetTasks: [WidgetTask] = []
-    
-    for task in tasks {
-      if task.dateCompleted_ != nil {
-        widgetTasks.append(WidgetTask(title: task.title_ ?? "Error", priority: task.priority_ ?? "Low", deadline: task.deadline_))
-      }
-    }
+    let widgetTasks = WidgetTask.mockData
     
     let entry = TaskEntry(tasks: widgetTasks)
     completion(entry)
@@ -71,13 +59,24 @@ struct Provider: TimelineProvider {
 }
 
 struct CheckedWidgetEntryView : View {
+  @Environment(\.widgetFamily) private var widgetFamily
+
   var entry: Provider.Entry
   
+  var numberOfExtraTasks: Int {
+    entry.tasks.count - 3
+  }
+  
   var body: some View {
-    VStack {
-      ForEach(entry.tasks) { task in
-        Text(task.title)
-      }
+    switch widgetFamily {
+    case .systemSmall:
+      SmallWidgetView(widgetTasks: entry.tasks)
+    case .systemMedium:
+      MediumWidgetView(widgetTasks: entry.tasks)
+    case .systemLarge:
+      LargeWidgetView(widgetTasks: entry.tasks)
+    @unknown default:
+        fatalError()
     }
   }
 }
@@ -90,14 +89,14 @@ struct CheckedWidget: Widget {
     StaticConfiguration(kind: kind, provider: Provider()) { entry in
       CheckedWidgetEntryView(entry: entry)
     }
-    .configurationDisplayName("My Widget")
-    .description("This is an example widget.")
+    .configurationDisplayName("Checked")
+    .description("Keep track of tasks and reminders.")
   }
 }
 
 struct CheckedWidget_Previews: PreviewProvider {
   static var previews: some View {
-    CheckedWidgetEntryView(entry: TaskEntry(tasks: [WidgetTask.preview]))
+    CheckedWidgetEntryView(entry: TaskEntry(tasks: WidgetTask.mockData))
       .previewContext(WidgetPreviewContext(family: .systemSmall))
   }
 }
