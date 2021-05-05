@@ -22,7 +22,7 @@ class CoreDataTests: XCTestCase {
   }
   
   private func getTask() -> Task? {
-    let tasks = taskManager.getTasks()
+    let tasks = taskManager.getTasks().sortedByDateCreated
     guard let task = tasks.first else { return nil }
     return task
   }
@@ -67,12 +67,14 @@ class CoreDataTests: XCTestCase {
     XCTAssertNil(task.dateCompleted_)
     XCTAssertFalse(task.taskCompleted)
     
-    taskManager.updateTaskCompletion(for: task, to: true) // Task marked completed
+    // Task marked completed
+    taskManager.updateTaskCompletion(for: task, to: true)
     
     XCTAssertEqual(date.fullDeadlineFormat, task.dateCompleted_!.fullDeadlineFormat)
     XCTAssertTrue(task.taskCompleted)
 
-    taskManager.updateTaskCompletion(for: task, to: false) // Task marked incomplete, reset
+    // Task marked incomplete, reset
+    taskManager.updateTaskCompletion(for: task, to: false)
 
     XCTAssertNil(task.dateCompleted_)
     XCTAssertFalse(task.taskCompleted)
@@ -108,15 +110,19 @@ class CoreDataTests: XCTestCase {
   }
   
   func testTaskDeleted() {
+    // Add second task
     addTask(title: "Task 2")
     let tasks = taskManager.getTasks()
-    XCTAssertEqual(tasks.count, 2)
     
-    XCTAssertEqual(tasks[0].title, "Task 2")
+    XCTAssertEqual(tasks.count, 2)
+    XCTAssertEqual(tasks[1].title, "Task 2")
+    
+    // Delete Task 1
     taskManager.deleteTask(tasks[0])
     
     let updatedTasks = taskManager.getTasks()
+    
     XCTAssertEqual(updatedTasks.count, 1)
-    XCTAssertEqual(updatedTasks[0].title, "Task 1")
+    XCTAssertEqual(updatedTasks[0].title, "Task 2")
   }
 }
