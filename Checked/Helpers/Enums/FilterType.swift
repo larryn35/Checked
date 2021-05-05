@@ -11,7 +11,7 @@ enum FilterType: String {
   case incomplete = "Active"
   case overdue = "Overdue"
   case dueToday = "Due today"
-  case thisWeek = "Due soon"
+  case thisWeek = "Upcoming"
   case completed = "Completed"
   case all = "All tasks"
 }

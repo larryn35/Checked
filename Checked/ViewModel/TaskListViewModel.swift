@@ -66,10 +66,10 @@ extension TaskListViewModel {
     tasks.overdue.isEmpty ? Constants.textColor : Constants.magenta
   }
   var dueTodayString: String {
-    "Day today: \(tasks.dueToday.count)"
+    "Due today: \(tasks.dueToday.count)"
   }
   var dueSoonString: String {
-    "Due soon: \(tasks.dueSoon.count)"
+    "Upcoming: \(tasks.dueSoon.count)"
   }
 }
  

@@ -28,8 +28,11 @@ extension Array where Element == Task {
     self.tasksWithDeadline.filter { $0.deadline_!.short == Date().short }
   }
   
+  // Tasks due within 7 days, excluding ones due today
   var dueSoon: [Task] {
-    self.tasksWithDeadline.filter { $0.deadline_! < Date().addingTimeInterval(Constants.week) }
+    self.tasksWithDeadline.filter {
+      $0.deadline.short != Date().short && $0.deadline_! < Date().addingTimeInterval(Constants.week)
+    }
   }
   
   var sortedByDateCreated: [Task] {
