@@ -83,7 +83,6 @@ final class TaskManager: TaskManagerProtocol {
   func deleteTask(_ task: Task) {
     viewContext.delete(task)
     save()
-    
   }
   
   private func save() {
@@ -91,12 +90,4 @@ final class TaskManager: TaskManagerProtocol {
 
     WidgetCenter.shared.reloadAllTimelines()
   }
-}
-
-final class InfoTaskManager: TaskManagerProtocol {
-  func getTasks() -> [Task] { [Task]() }
-  func addTask(id: UUID, priority: String, title: String, notes: String, reminderDate: Date?, deadline: Date?) { }
-  func updateTask(_ task: Task, priority: String, title: String, notes: String, deadline: Date?, reminderDate: Date?) { }
-  func updateTaskCompletion(for task: Task, to completed: Bool) { }
-  func deleteTask(_ task: Task) { }
 }

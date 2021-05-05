@@ -8,22 +8,26 @@
 import SwiftUI
 
 struct TaskRow: View {
-  typealias TaskCheckedHandler = () -> Void
-  typealias EditTaskHandler = () -> Void
-  typealias DeleteTaskHandler = () -> Void
   
   // MARK: - Variables
   @ObservedObject var vm: TaskRowViewModel
-  @State private var showButtons = false
+  
+  // For button animations
   @State private var checkButtonTapped = false
   @State private var editButtonTapped = false
   @State private var deleteButtonTapped = false
+  
+  @State private var showButtons = false
+  
+  typealias TaskCheckedHandler = () -> Void
+  typealias EditTaskHandler = () -> Void
+  typealias DeleteTaskHandler = () -> Void
   
   var taskChecked: TaskCheckedHandler
   var editTask: EditTaskHandler
   var deleteTask: DeleteTaskHandler
   
-  let hapticsManager = HapticsManager()
+  private let hapticsManager = HapticsManager()
   
   // MARK: - Body
   var body: some View {
@@ -38,7 +42,6 @@ struct TaskRow: View {
         }
         
         withAnimation { checkButtonTapped.toggle() }
-        
         
         DispatchQueue.main.asyncAfter(deadline: .now()+0.6) {
           taskChecked()
@@ -81,7 +84,6 @@ struct TaskRow: View {
         // MARK:  Delete task button
         Button("Delete task") {
           hapticsManager.notification(type: .success)
-
           withAnimation { deleteButtonTapped.toggle() }
           
           DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -111,6 +113,8 @@ struct TaskRow: View {
 
 // MARK: - Initializers
 extension TaskRow {
+  
+  /// For TaskList
   init(taskChecked: @escaping TaskCheckedHandler,
        editTask: @escaping EditTaskHandler,
        deleteTask: @escaping DeleteTaskHandler,
@@ -121,6 +125,7 @@ extension TaskRow {
     self.deleteTask = deleteTask
   }
   
+  /// Init for InfoView, use InfoTask.guides
   init(info: InfoTask) {
     vm = TaskRowViewModel(infoTask: info)
     taskChecked = {}

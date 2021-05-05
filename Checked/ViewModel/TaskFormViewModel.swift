@@ -7,35 +7,31 @@
 
 import SwiftUI
 
-enum FormErrorType: String {
-  case deadlinePassed = "Deadline has passed"
-  case reminderPassed = "Reminder has passed"
-  case invalidTitle = "Task name cannot be blank"
-}
-
 final class TaskFormViewModel: ObservableObject {
   
+  // Task properties
   @Published var title = ""
   @Published var taskCompleted = false
   @Published var notes = ""
+  @Published var priority: PriorityType = .low
   @Published var deadline = Date().addingTimeInterval(Constants.hour)
   @Published var reminderDate =  Date().addingTimeInterval(Constants.hour)
+  @Published var dateCompleted: Date? = nil
+
   @Published var showDeadlinePicker = false
   @Published var showReminderPicker = false
-  @Published var priority: PriorityType = .low
-  @Published var dateCompleted: Date? = nil
-  @Published var showSaveButton = false
-  @Published var formError: FormErrorType? = nil
   @Published var showErrorMessage = false
+  @Published var showSaveButton = false
+
+  @Published var formError: FormErrorType? = nil
+    
+  private let notificationManager = NotificationManager()
+  private var taskManager: TaskManagerProtocol
   
-  var errorMessage = ""
+  private var currentTask: Task?
+  private let newTaskID = UUID()
   
-  let notificationManager = NotificationManager()
-  var taskManager: TaskManagerProtocol
-  
-  var currentTask: Task?
   let dateCreated: String
-  let newTaskID = UUID()
   
   // Setup new task
   init(taskManager: TaskManagerProtocol = TaskManager()) {
@@ -72,6 +68,12 @@ final class TaskFormViewModel: ObservableObject {
     }
     
     self.taskManager = taskManager
+  }
+  
+  enum FormErrorType: String {
+    case deadlinePassed = "Deadline has passed"
+    case reminderPassed = "Reminder has passed"
+    case invalidTitle = "Task name cannot be blank"
   }
 }
 
@@ -131,13 +133,19 @@ extension TaskFormViewModel {
   }
 }
 
-
 // MARK: - Functions
 extension TaskFormViewModel {
 
-  func setupNotification() {
+  // Set local notification for current or new task using UUID
+  private func setupNotification() {
     if showReminderPicker {
-      notificationManager.sendNotification(id: currentTask?.uuid ?? newTaskID.uuidString,
+      
+      var taskID: String {
+        guard let currentTask = currentTask else { return newTaskID.uuidString }
+        return currentTask.uuid
+      }
+      
+      notificationManager.sendNotification(id: taskID,
                                            body: title,
                                            triggerDate: reminderDate)
       
@@ -168,7 +176,9 @@ extension TaskFormViewModel {
     }
   }
   
-  func updateToDo() {
+  // MARK: CRUD
+  
+  func updateTask() {
     let optionalDeadline: Date? = showDeadlinePicker ? deadline : nil
     let optionalReminder: Date? = showReminderPicker ? reminderDate : nil
     let priority = priority.text
@@ -183,7 +193,7 @@ extension TaskFormViewModel {
     setupNotification()
   }
   
-  func addToDo() {
+  func addTask() {
     let optionalDeadline: Date? = showDeadlinePicker ? deadline : nil
     let optionalReminder: Date? = showReminderPicker ? reminderDate : nil
     
@@ -197,7 +207,7 @@ extension TaskFormViewModel {
     setupNotification()
   }
   
-  func deleteToDo() {
+  func deleteTask() {
     guard let currentTask = currentTask else { return }
     taskManager.deleteTask(currentTask)
     notificationManager.removeNotification(id: currentTask.uuid)

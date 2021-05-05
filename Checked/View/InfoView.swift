@@ -9,9 +9,10 @@ import SwiftUI
 
 struct InfoView: View {
   @AppStorage("username") var username: String = ""
-  @State private var cancelButtonPressed = false
-
   @Binding var showInfo: Bool
+  
+  // For button animations
+  @State private var cancelButtonPressed = false
 
   var body: some View {
     ScrollView {

@@ -11,12 +11,16 @@ import Combine
 struct TaskForm: View {
   @Environment(\.presentationMode) var presentationMode
   @ObservedObject var formVM: TaskFormViewModel
-  @State private var keyBoardDisplayed: Bool = false
-  @State private var showDeadlinePicker: Bool = false
+
+  // For button animations
   @State private var cancelButtonPressed: Bool = false
   @State private var saveButtonPressed: Bool = false
   
-  let hapticsManager = HapticsManager()
+  @State private var showDeadlinePicker: Bool = false
+  
+  @State private var keyBoardDisplayed: Bool = false
+    
+  private let hapticsManager = HapticsManager()
   
   var body: some View {
     ViewLayout(backgroundImage: formVM.backgroundImage) {
@@ -30,36 +34,36 @@ struct TaskForm: View {
     } content: {
       VStack(alignment: .leading, spacing: 20) {
         
-        // Priority status buttons
+        // MARK: Priority status buttons
         HStack {
-          ForEach(PriorityType.allCases) { status in
+          ForEach(PriorityType.allCases) { priority in
             Button {
               hapticsManager.impact(style: .soft)
-
-              formVM.priority = status
+              formVM.priority = priority
             } label: {
-              Text(status.text)
+              // priority.rawValue : Int; 0 = low, 1 = medium, 2 = high
+              Text(priority.text)
                 .customFont(style: .caption1,
-                            textColor: Constants.prioritiyColors[status.rawValue])
+                            textColor: Constants.prioritiyColors[priority.rawValue])
                 .padding(.vertical, 8)
                 .frame(width: 70)
                 .background(
                   RoundedRectangle(cornerRadius: 10)
-                    .fill(Constants.priorityBGColors[status.rawValue])
+                    .fill(Constants.priorityBGColors[priority.rawValue])
                     .overlay(RoundedRectangle(cornerRadius: 10)
-                              .stroke(Constants.prioritiyColors[status.rawValue], lineWidth: 0.5))
+                              .stroke(Constants.prioritiyColors[priority.rawValue], lineWidth: 0.5))
                 )
-                .opacity(formVM.priority == status ? 1 : 0.3)
+                .opacity(formVM.priority == priority ? 1 : 0.3)
             }
           }
         }
         .padding(.top)
         
-        // Date created
+        // MARK: Date created
         Text("Date created: \(formVM.dateCreated)")
           .customFont(style: .subheadline, weight: .semibold)
         
-        // Edit task title
+        // MARK: Edit task title
         VStack(alignment:.leading) {
           Text("Task")
             .customFont(style: .subheadline, weight: .semibold)
@@ -76,7 +80,7 @@ struct TaskForm: View {
           .modifier(CustomTextFieldModifier())
         }
         
-        // Edit task note
+        // MARK: Edit task note
         VStack(alignment:.leading) {
           HStack {
             Text("Description")
@@ -93,6 +97,7 @@ struct TaskForm: View {
               }
             }
           }
+          // Detect when keyboard is displayed/hidden
           .onReceive(Publishers.keyboardDisplayed) { (status) in
             keyBoardDisplayed = status
           }
@@ -102,6 +107,8 @@ struct TaskForm: View {
             .frame(minHeight: 20, maxHeight: 120)
         }
         
+        
+        // MARK: Date Pickers
         if !formVM.taskCompleted {
           // Set deadline
           DatePickerView(showDatePicker: $formVM.showDeadlinePicker,
@@ -113,7 +120,7 @@ struct TaskForm: View {
                          text: formVM.reminderText,
                          date: $formVM.reminderDate)
           
-          
+          // MARK: Date completed text
         } else {
           // Task completed
           Text("Date completed: \(formVM.dateCompletedText)")
@@ -123,6 +130,7 @@ struct TaskForm: View {
         
         Spacer()
         
+        // MARK: Error message
         if formVM.showErrorMessage {
           Text(formVM.formError!.rawValue)
             .customFont(style: .subheadline,
@@ -132,6 +140,7 @@ struct TaskForm: View {
             .frame(maxWidth: .infinity, alignment: .center)
         }
         
+        // MARK: Cancel/save buttons
         HStack(spacing: 60) {
           cancelButton
           saveButton
@@ -149,7 +158,6 @@ extension TaskForm {
     VStack(spacing: 5) {
       Button("cancel") {
         hapticsManager.impact(style: .light)
-
         withAnimation { cancelButtonPressed.toggle() }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
@@ -168,25 +176,25 @@ extension TaskForm {
     VStack(spacing: 5) {
       Button("save") {
         
+        // Check if form is valid
         formVM.validateForm()
         
+        // Form is not valid
         if formVM.formError != nil {
           hapticsManager.notification(type: .error)
           
+          // Form is valid
         } else {
-        
           hapticsManager.notification(type: .success)
-          
           withAnimation { saveButtonPressed.toggle() }
           
           DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             if formVM.updating {
-              formVM.updateToDo()
-              presentationMode.wrappedValue.dismiss()
+              formVM.updateTask()
             } else {
-              formVM.addToDo()
-              presentationMode.wrappedValue.dismiss()
+              formVM.addTask()
             }
+            presentationMode.wrappedValue.dismiss()
           }
         }
       }

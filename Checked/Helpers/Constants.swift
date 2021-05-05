@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-extension UIScreen {
-  static let screenWidth = UIScreen.main.bounds.size.width
-}
-
 struct Constants {
   static let gradientHome = Image("gradientHome")
   static let gradientAdd = Image("gradientAdd")
@@ -31,13 +27,14 @@ struct Constants {
   static let taskRowBG: Color = Color("taskRowBG")
   static let textColor: Color = Color("textColor")
   
-  static let gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [blue, orange]), startPoint: .topLeading, endPoint: .bottomTrailing)
-  
   static let addButton: Image = Image("addButton")
   
   static let hour: Double = 60*60
   static let week: Double = 60*60*24*7
     
+  static let quote: String = "Reach for the stars, so if you fall, you land on a cloud"
+  
   // MARK: - Widget
   static let widgetBG = Image("widgetBG")
+  static let noPendingTasks = "No pending tasks"
 }

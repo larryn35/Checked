@@ -22,7 +22,7 @@ struct LargeWidgetView: View {
         .padding(.bottom, 8)
         
         if widgetTasks.isEmpty {
-          Text("No pending tasks")
+          Text(Constants.noPendingTasks)
             .customFont()
           
         } else {
@@ -54,13 +54,13 @@ struct LargeWidgetView: View {
   }
 }
 
-enum DeadlineType: String {
+private enum DeadlineType: String {
   case overdue = "overdue"
   case dueToday = "due today"
   case dueSoon = "due soon"
 }
 
-struct DeadlineCard: View {
+private struct DeadlineCard: View {
   let count: String
   let type: DeadlineType
   

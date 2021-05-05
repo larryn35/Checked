@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// "Tasks" that explain different color and symbols for the TaskRow
 struct InfoTask: Hashable {
   let title: String
   var priority: PriorityType = .low

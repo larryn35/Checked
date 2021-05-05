@@ -31,7 +31,7 @@ final class TaskRowViewModel: ObservableObject {
     infoView = false
   }
   
-  // For InfoView
+  /// Init for InfoView, use InfoTask.guides
   init(infoTask: InfoTask) {
     taskTitle = infoTask.title
     taskPriority = infoTask.priority
@@ -42,6 +42,10 @@ final class TaskRowViewModel: ObservableObject {
     reminderSet = infoTask.reminderSet
     infoView = true
   }
+}
+
+// MARK: - Variables
+extension TaskRowViewModel {
   
   var rowText: String {
     showDeadline ? "Due: \(taskDeadline)" : taskTitle

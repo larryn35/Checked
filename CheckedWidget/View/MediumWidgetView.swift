@@ -15,9 +15,10 @@ struct MediumWidgetView: View {
       
       VStack {
         HStack {
+          // MARK: Tasks
           VStack(alignment: .leading) {
             if widgetTasks.isEmpty {
-              Text("No pending tasks")
+              Text(Constants.noPendingTasks)
                 .customFont(style: .caption1)
               
             } else {
@@ -39,6 +40,7 @@ struct MediumWidgetView: View {
           .padding(.bottom, 2)
           .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
           
+          // MARK: Deadline info
           VStack(alignment: .trailing) {
             Group {
               Text("Overdue: \(widgetTasks.overdueCount)")
@@ -59,6 +61,7 @@ struct MediumWidgetView: View {
         
         Spacer()
         
+        // MARK: Extra tasks
         if widgetTasks.count > 3 {
           Text("+ \(widgetTasks.numberOfExtraTasks) more")
             .customFont(style: .caption1, weight: .semibold)

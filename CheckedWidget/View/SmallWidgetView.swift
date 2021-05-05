@@ -15,7 +15,7 @@ struct SmallWidgetView: View {
       
       VStack(alignment: .leading) {
         if widgetTasks.isEmpty {
-          Text("No pending tasks")
+          Text(Constants.noPendingTasks)
             .customFont(style: .caption1)
         } else {
           ForEach(widgetTasks.prefix(3)) { task in

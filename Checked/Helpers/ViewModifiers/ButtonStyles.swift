@@ -118,7 +118,6 @@ struct CircleFillAnimationStyle: ButtonStyle {
 
 /// For info and add buttons. Offset and scales button on press
 struct OffsetAnimationStyle: ButtonStyle {
-  
   var size: CGFloat = 70
   let offset: CGFloat = -3
   

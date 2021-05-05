@@ -9,14 +9,14 @@ import SwiftUI
 
 final class TaskListViewModel: ObservableObject {
   @Published var tasks: [Task] = []
-  @Published var title: String = ""
-  @Published var deadline: Date = Date().addingTimeInterval(60*60)
+  
   @Published var showDatePicker = false
+  
   @Published var filterType: FilterType = .incomplete
   @Published var sortType: SortType = .dateCreated
   
-  let notificationManager = NotificationManager()
-  let taskManager: TaskManagerProtocol
+  private let notificationManager = NotificationManager()
+  private let taskManager: TaskManagerProtocol
   
   init(taskManager: TaskManagerProtocol = TaskManager()) {
     self.taskManager = taskManager
@@ -25,6 +25,7 @@ final class TaskListViewModel: ObservableObject {
 
 // MARK: - Variables
 extension TaskListViewModel {
+  
   var taskList: [Task] {
     var displayedList = tasks
     
@@ -79,6 +80,7 @@ extension TaskListViewModel {
     filterType = filter
   }
   
+  // Cycle through sort options
   func changeSort() {
     withAnimation {
       if sortType == .dateCreated {
@@ -91,10 +93,13 @@ extension TaskListViewModel {
     }
   }
   
+  /// When a filter is selected, change its underline scale from 0 to 1
   func filterUnderlineScale(for type: FilterType) -> CGFloat {
     filterType == type ? 1 : 0
   }
   
+  // MARK: CRUD
+
   func getTasks() {
     tasks = taskManager.getTasks()
   }

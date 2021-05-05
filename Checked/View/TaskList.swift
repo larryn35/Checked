@@ -14,7 +14,7 @@ struct TaskList: View {
   @State private var modalType: ModalType? = nil
   @State private var showInfo = false
   
-  let hapticsManager = HapticsManager()
+  private let hapticsManager = HapticsManager()
   
   var body: some View {
     ZStack(alignment: .top) {
@@ -24,18 +24,16 @@ struct TaskList: View {
         ZStack(alignment: .topTrailing) {
           Button("Info") {
             hapticsManager.impact(style: .soft)
-            
             withAnimation { showInfo.toggle() }
           }
           .buttonStyle(CircleFillAnimationStyle(bindingBool: $showInfo,
                                                 sfSymbol: .info))
           
           VStack(alignment: .leading) {
-            
-            // Text header
+            // Name + Quote
             Text("Hello, \(username)")
               .customFont(style: .largeTitle, weight: .semibold, textColor: Color.white)
-            Text("Reach for the stars, so if you fall, you land on a cloud")
+            Text(Constants.quote)
               .customFont(style: .caption1, weight: .semibold, textColor: Color.white)
 
             Spacer().frame(height: 20)
@@ -45,29 +43,29 @@ struct TaskList: View {
           }
         }
         
-        // MARK: Body
+        // MARK: - Body
       } content: {
         ZStack(alignment: .bottom) {
           VStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 10) {
               
-              // Filter buttons
+              // MARK: Filter buttons
               filterButtonsSubview
               
-              // Sort button
+              // MARK: Sort button
               Button {
                 hapticsManager.impact(style: .soft)
-
-                // Sort list by deadline, priority, date created
                 vm.changeSort()
+                
               } label: {
-                Label("Sorted by: \(vm.sortType.rawValue)", systemImage: "arrow.up.arrow.down") // Change text based on sort type
+                // Change text based on sort type
+                Label("Sorted by: \(vm.sortType.rawValue)", systemImage: "arrow.up.arrow.down")
                   .customFont(style: .caption1)
               }
               .accentColor(Constants.textColor)
             }
             
-            // Task list
+            // MARK: Task list
             ScrollView {
               VStack(spacing: 10) {
                 ForEach(vm.taskList) { task in
@@ -92,10 +90,9 @@ struct TaskList: View {
             .frame(maxHeight: .infinity, alignment: .top)
           }
           
-          // Add button
+          // MARK: Add button
           Button {
             hapticsManager.impact(style: .light)
-            
             withAnimation { modalType = .newTask }
           } label: {
             Constants.addButton
@@ -108,11 +105,11 @@ struct TaskList: View {
         .fullScreenCover(item: $modalType, onDismiss: vm.getTasks) { $0 }
       }
       
+      // MARK: InfoView
       if showInfo {
         InfoView(showInfo: $showInfo)
           .transition(.move(edge: .bottom))
       }
-      
     }
     .onAppear {
       vm.getTasks()
@@ -130,19 +127,19 @@ struct TaskList: View {
 // MARK: - Subviews
 extension TaskList {
   
+  // Display filter options
   private var filterButtonsSubview: some View {
     ScrollView(.horizontal) {
       HStack(spacing: 20) {
         ForEach(FilterType.allCases) { type in
           Button {
             hapticsManager.impact(style: .soft)
-
-            // Change filter type
             withAnimation { vm.changeFilter(to: type) }
           } label: {
             Text(type.rawValue)
               .customFont(style: .subheadline)
               .padding(.vertical, 10)
+              // Display underline for current filter option
               .overlay(RoundedRectangle(cornerRadius: 10)
                         .fill(Constants.blue)
                         .frame(height: 2)
@@ -151,34 +148,34 @@ extension TaskList {
               .padding(.bottom, 5)
           }
           .accentColor(Constants.textColor)
-          .id(type)
         }
       }
     }
   }
   
+  // Display information about pending and completed tasks
   private var summarySubview: some View {
     HStack(alignment: .bottom) {
       VStack(alignment: .leading) {
         Text("Tasks")
-          .customFont(textColor: Constants.blue)
+          .customFont(style: .subheadline,textColor: Constants.blue)
         
         Group {
           Text(vm.activeTasksString)
           Text(vm.completedTasksString)
         }
-        .customFont()
+        .customFont(style: .subheadline)
       }
       .padding()
       
       VStack(alignment: .leading) {
         Text(vm.overdueTasksString)
-          .customFont(textColor: vm.overdueTaskColor)
+          .customFont(style: .subheadline, textColor: vm.overdueTaskColor)
         Group {
           Text(vm.dueTodayString)
           Text(vm.dueSoonString)
         }
-        .customFont()
+        .customFont(style: .subheadline)
       }
       .frame(maxWidth: .infinity)
       .padding()
