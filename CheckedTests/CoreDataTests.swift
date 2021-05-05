@@ -22,7 +22,7 @@ class CoreDataTests: XCTestCase {
   }
   
   private func getTask() -> Task? {
-    let tasks = taskManager.getTasks().sortedByDateCreated
+    let tasks = taskManager.getTasks()
     guard let task = tasks.first else { return nil }
     return task
   }
@@ -112,7 +112,7 @@ class CoreDataTests: XCTestCase {
   func testTaskDeleted() {
     // Add second task
     addTask(title: "Task 2")
-    let tasks = taskManager.getTasks()
+    let tasks = taskManager.getTasks().sortedByDateCreated
     
     XCTAssertEqual(tasks.count, 2)
     XCTAssertEqual(tasks[1].title, "Task 2")
