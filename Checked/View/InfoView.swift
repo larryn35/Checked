@@ -20,9 +20,7 @@ struct InfoView: View {
         // Greeting
         HStack {
           Text("Hello," )
-            .fontWeight(.semibold)
-            .font(.title3)
-            .foregroundColor(Constants.textColor)
+            .customFont(style: .title3, weight: .semibold)
           
           // Change name
           TextField("Enter your name (optional)", text: $username)
@@ -31,8 +29,7 @@ struct InfoView: View {
           
         // Subtitle
         Text("Symbols Guide")
-          .fontWeight(.semibold)
-          .foregroundColor(Constants.textColor)
+          .customFont(weight: .semibold)
           .padding(.vertical)
         
         // List of taskRows with info

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct TaskList: View {
   @AppStorage("username") var username: String = ""
@@ -33,14 +34,10 @@ struct TaskList: View {
             
             // Text header
             Text("Hello, \(username)")
-              .font(.largeTitle)
-              .fontWeight(.semibold)
-              .foregroundColor(.white)
+              .customFont(style: .largeTitle, weight: .semibold, textColor: Color.white)
             Text("Reach for the stars, so if you fall, you land on a cloud")
-              .font(.caption)
-              .fontWeight(.semibold)
-              .foregroundColor(.white)
-            
+              .customFont(style: .caption1, weight: .semibold, textColor: Color.white)
+
             Spacer().frame(height: 20)
             
             // Task overview
@@ -65,8 +62,7 @@ struct TaskList: View {
                 vm.changeSort()
               } label: {
                 Label("Sorted by: \(vm.sortType.rawValue)", systemImage: "arrow.up.arrow.down") // Change text based on sort type
-                  .font(.caption)
-                  .foregroundColor(Constants.textColor)
+                  .customFont(style: .caption1)
               }
               .accentColor(Constants.textColor)
             }
@@ -90,6 +86,8 @@ struct TaskList: View {
                     task: task)
                 }
               }
+              
+              Spacer().frame(height: 60)
             }
             .frame(maxHeight: .infinity, alignment: .top)
           }
@@ -118,7 +116,13 @@ struct TaskList: View {
     }
     .onAppear {
       vm.getTasks()
+    }
+    
+    // Refresh list and widget when app becomes active / returns from background
+    .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
       NotificationManager().removeBadge()
+      WidgetCenter.shared.reloadAllTimelines()
+      vm.getTasks()
     }
   }
 }
@@ -137,7 +141,7 @@ extension TaskList {
             withAnimation { vm.changeFilter(to: type) }
           } label: {
             Text(type.rawValue)
-              .font(.subheadline)
+              .customFont(style: .subheadline)
               .padding(.vertical, 10)
               .overlay(RoundedRectangle(cornerRadius: 10)
                         .fill(Constants.blue)
@@ -157,24 +161,24 @@ extension TaskList {
     HStack(alignment: .bottom) {
       VStack(alignment: .leading) {
         Text("Tasks")
-          .foregroundColor(Constants.blue)
+          .customFont(textColor: Constants.blue)
         
         Group {
           Text(vm.activeTasksString)
           Text(vm.completedTasksString)
         }
-        .foregroundColor(Constants.textColor)
+        .customFont()
       }
       .padding()
       
       VStack(alignment: .leading) {
         Text(vm.overdueTasksString)
-          .foregroundColor(vm.overdueTaskColor)
+          .customFont(textColor: vm.overdueTaskColor)
         Group {
           Text(vm.dueTodayString)
           Text(vm.dueSoonString)
         }
-        .foregroundColor(Constants.textColor)
+        .customFont()
       }
       .frame(maxWidth: .infinity)
       .padding()

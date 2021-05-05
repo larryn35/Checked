@@ -18,12 +18,12 @@ struct DatePickerView: View {
     HStack(alignment: .top) {
       VStack(alignment: .leading) {
         Text(text)
-          .font(.subheadline)
-          .fontWeight(.semibold)
+          .customFont(style: .subheadline, weight: .semibold)
         
         if showDatePicker.wrappedValue {
           DatePicker("Select date", selection: date, in: Date()...)
             .frame(maxWidth: .infinity, alignment: .leading)
+            .customFont(textColor: Constants.blue)
             .accentColor(Constants.blue)
             .labelsHidden()
         }

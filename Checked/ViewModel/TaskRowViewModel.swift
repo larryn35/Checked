@@ -55,8 +55,8 @@ final class TaskRowViewModel: ObservableObject {
     reminderSet ? Constants.blue : Constants.textColor
   }
   
-  var font: Font {
-    infoView ? .caption : .body
+  var font: UIFont.TextStyle {
+    infoView ? .caption1 : .body
   }
   
   var checkBoxColor: Color {

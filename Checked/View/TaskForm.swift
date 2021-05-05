@@ -23,9 +23,7 @@ struct TaskForm: View {
       
       // MARK: - Header
       Text(formVM.formTitle)
-        .font(.largeTitle)
-        .fontWeight(.semibold)
-        .foregroundColor(.white)
+        .customFont(style: .largeTitle, weight: .semibold, textColor: .white)
         .opacity(keyBoardDisplayed ? 0.1 : 1)
       
       // MARK: - Body
@@ -41,9 +39,9 @@ struct TaskForm: View {
               formVM.priority = status
             } label: {
               Text(status.text)
-                .font(.caption)
+                .customFont(style: .caption1,
+                            textColor: Constants.prioritiyColors[status.rawValue])
                 .padding(.vertical, 8)
-                .foregroundColor(Constants.prioritiyColors[status.rawValue])
                 .frame(width: 70)
                 .background(
                   RoundedRectangle(cornerRadius: 10)
@@ -59,25 +57,30 @@ struct TaskForm: View {
         
         // Date created
         Text("Date created: \(formVM.dateCreated)")
-          .font(.subheadline)
-          .fontWeight(.semibold)
+          .customFont(style: .subheadline, weight: .semibold)
         
         // Edit task title
         VStack(alignment:.leading) {
           Text("Task")
-            .font(.subheadline)
-            .fontWeight(.semibold)
+            .customFont(style: .subheadline, weight: .semibold)
           
-          TextField(formVM.placeholderText, text: $formVM.title)
-            .modifier(CustomTextFieldModifier())
+          HStack {
+            TextField(formVM.placeholderText, text: $formVM.title)
+            Button {
+              formVM.title = ""
+            } label: {
+              Image(systemName: "xmark.circle")
+                .foregroundColor(.secondary)
+            }
+          }
+          .modifier(CustomTextFieldModifier())
         }
         
         // Edit task note
         VStack(alignment:.leading) {
           HStack {
             Text("Description")
-              .font(.subheadline)
-              .fontWeight(.semibold)
+              .customFont(style: .subheadline, weight: .semibold)
             
             // Dismiss keyboard button
             if keyBoardDisplayed {
@@ -85,8 +88,7 @@ struct TaskForm: View {
                 hideKeyboard()
               } label: {
                 Label("Dismiss keyboard", systemImage: "keyboard.chevron.compact.down")
-                  .font(.caption)
-                  .foregroundColor(Constants.orange)
+                  .customFont(style: .caption1, textColor: Constants.orange)
                   .frame(maxWidth: .infinity, alignment: .trailing)
               }
             }
@@ -115,12 +117,20 @@ struct TaskForm: View {
         } else {
           // Task completed
           Text("Date completed: \(formVM.dateCompletedText)")
-            .font(.subheadline)
-            .fontWeight(.semibold)
+            .customFont(style: .subheadline, weight: .semibold)
             .padding(.bottom)
         }
         
         Spacer()
+        
+        if formVM.showErrorMessage {
+          Text(formVM.formError!.rawValue)
+            .customFont(style: .subheadline,
+                        weight: .semibold,
+                        textColor: Constants.magenta)
+            .padding(.bottom)
+            .frame(maxWidth: .infinity, alignment: .center)
+        }
         
         HStack(spacing: 60) {
           cancelButton
@@ -150,35 +160,42 @@ extension TaskForm {
                                         sfSymbol: .xmark))
       
       Text("cancel")
-        .foregroundColor(Constants.textColor)
-        .font(.caption)
+        .customFont(style: .caption1)
     }
   }
   
   private var saveButton: some View {
     VStack(spacing: 5) {
       Button("save") {
-        hapticsManager.notification(type: .success)
-
-        withAnimation { saveButtonPressed.toggle() }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-          if formVM.updating {
-            formVM.updateToDo()
-            presentationMode.wrappedValue.dismiss()
-          } else {
-            formVM.addToDo()
-            presentationMode.wrappedValue.dismiss()
+        formVM.validateForm()
+        
+        if formVM.formError != nil {
+          hapticsManager.notification(type: .error)
+          
+        } else {
+        
+          hapticsManager.notification(type: .success)
+          
+          withAnimation { saveButtonPressed.toggle() }
+          
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            if formVM.updating {
+              formVM.updateToDo()
+              presentationMode.wrappedValue.dismiss()
+            } else {
+              formVM.addToDo()
+              presentationMode.wrappedValue.dismiss()
+            }
           }
         }
       }
       .buttonStyle(CircleFillAnimationStyle(bindingBool: $saveButtonPressed,
                                             sfSymbol: .folder))
-      .disabled(formVM.isDisabled)
       
       Text("save")
-        .foregroundColor(saveButtonPressed ? Constants.blue : Constants.textColor)
-        .font(.caption)
+        .customFont(style: .caption1,
+                    textColor: saveButtonPressed ? Constants.blue : Constants.textColor)
     }
   }
 }

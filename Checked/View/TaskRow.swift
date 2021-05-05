@@ -52,8 +52,7 @@ struct TaskRow: View {
       VStack(alignment: .leading) {
         Text(vm.rowText)
           .lineLimit(vm.lineLimit)
-          .foregroundColor(vm.foregroundColor)
-          .font(vm.font)
+          .customFont(style: vm.font, textColor: vm.foregroundColor)
       }
       .frame(maxWidth: .infinity, alignment: .leading)
       .contentShape(Rectangle())

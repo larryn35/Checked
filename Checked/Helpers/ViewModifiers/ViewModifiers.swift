@@ -68,6 +68,7 @@ struct CustomTextFieldModifier: ViewModifier {
   
   func body(content: Content) -> some View {
     content
+      .customFont()
       .padding(8)
       .modifier(RoundedRectangleWithStrokeStyle())
   }
