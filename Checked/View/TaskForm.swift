@@ -26,45 +26,59 @@ struct TaskForm: View {
     ViewLayout(backgroundImage: formVM.backgroundImage) {
       
       // MARK: - Header
-      Text(formVM.formTitle)
-        .customFont(style: .largeTitle, weight: .semibold, textColor: .white)
-        .opacity(keyBoardDisplayed ? 0.1 : 1)
       
+      // Hide when keyboard is displayed to create roomr for TextEditor (blocked on smaller devices)
+      if !keyBoardDisplayed {
+        Text(formVM.formTitle)
+          .customFont(style: .largeTitle, weight: .semibold, textColor: .white)
+          .transition(.move(edge: .top))
+      }
+        
       // MARK: - Body
     } content: {
+      
+      ScrollView {
+      
       VStack(alignment: .leading, spacing: 20) {
         
-        // MARK: Priority status buttons
-        HStack {
-          ForEach(PriorityType.allCases) { priority in
-            Button {
-              hapticsManager.impact(style: .soft)
-              formVM.priority = priority
-            } label: {
-              // priority.rawValue : Int; 0 = low, 1 = medium, 2 = high
-              Text(priority.text)
-                .customFont(style: .caption1,
-                            textColor: Constants.prioritiyColors[priority.rawValue])
-                .padding(.vertical, 8)
-                .frame(width: 70)
-                .background(
-                  RoundedRectangle(cornerRadius: 10)
-                    .fill(Constants.priorityBGColors[priority.rawValue])
-                    .overlay(RoundedRectangle(cornerRadius: 10)
-                              .stroke(Constants.prioritiyColors[priority.rawValue], lineWidth: 0.5))
-                )
-                .opacity(formVM.priority == priority ? 1 : 0.3)
+          // MARK: Priority status buttons
+          HStack {
+            ForEach(PriorityType.allCases) { priority in
+              Button {
+                hapticsManager.impact(style: .soft)
+                formVM.priority = priority
+              } label: {
+                // priority.rawValue : Int; 0 = low, 1 = medium, 2 = high
+                Text(priority.text)
+                  .customFont(style: .caption1,
+                              textColor: Constants.prioritiyColors[priority.rawValue])
+                  .padding(.vertical, 8)
+                  .frame(width: 70)
+                  .background(
+                    RoundedRectangle(cornerRadius: 10)
+                      .fill(Constants.priorityBGColors[priority.rawValue])
+                      .overlay(RoundedRectangle(cornerRadius: 10)
+                                .strokeBorder(Constants.prioritiyColors[priority.rawValue], lineWidth: 0.5))
+                  )
+                  .opacity(formVM.priority == priority ? 1 : 0.3)
+              }
             }
           }
-        }
-        .padding(.top)
-        
+          .padding(.top)
+          
         // MARK: Date created
-        Text("Date created: \(formVM.dateCreated)")
-          .customFont(style: .subheadline, weight: .semibold)
         
+        if formVM.updating {
+          VStack(alignment: .leading) {
+            Text("Date created")
+              .customFont(style: .subheadline, weight: .semibold)
+            Text(formVM.dateCreated)
+              .customFont()
+          }
+        }
+          
         // MARK: Edit task title
-        VStack(alignment:.leading) {
+        VStack(alignment: .leading) {
           Text("Task")
             .customFont(style: .subheadline, weight: .semibold)
           
@@ -83,7 +97,7 @@ struct TaskForm: View {
         // MARK: Edit task note
         VStack(alignment:.leading) {
           HStack {
-            Text("Description")
+            Text("Notes")
               .customFont(style: .subheadline, weight: .semibold)
             
             // Dismiss keyboard button
@@ -92,21 +106,20 @@ struct TaskForm: View {
                 hideKeyboard()
               } label: {
                 Label("Dismiss keyboard", systemImage: "keyboard.chevron.compact.down")
-                  .customFont(style: .caption1, textColor: Constants.orange)
+                  .customFont(style: .caption1, textColor: Constants.blue)
                   .frame(maxWidth: .infinity, alignment: .trailing)
               }
             }
           }
           // Detect when keyboard is displayed/hidden
           .onReceive(Publishers.keyboardDisplayed) { (status) in
-            keyBoardDisplayed = status
+            withAnimation { keyBoardDisplayed = status }
           }
           
           TextEditor(text: $formVM.notes)
             .modifier(CustomTextFieldModifier())
-            .frame(minHeight: 20, maxHeight: 120)
+            .frame(height: 100)
         }
-        
         
         // MARK: Date Pickers
         if !formVM.taskCompleted {
@@ -148,6 +161,9 @@ struct TaskForm: View {
         .frame(maxWidth: .infinity, alignment: .center)
         .padding(.bottom)
       }
+        
+      }
+        
     }
   }
 }
