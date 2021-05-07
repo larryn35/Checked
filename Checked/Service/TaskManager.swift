@@ -7,7 +7,6 @@
 
 import Foundation
 import CoreData
-import WidgetKit
 
 protocol TaskManagerProtocol {
   func getTasks() -> [Task]
@@ -87,7 +86,5 @@ final class TaskManager: TaskManagerProtocol {
   
   private func save() {
     PersistenceController.shared.save()
-
-    WidgetCenter.shared.reloadAllTimelines()
   }
 }

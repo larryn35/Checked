@@ -43,6 +43,7 @@
 		5C5307DE263B572100F6E59A /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307DD263B572100F6E59A /* CoreDataTests.swift */; };
 		5C5307E9263B572100F6E59A /* CheckedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5307E8263B572100F6E59A /* CheckedUITests.swift */; };
 		5C5F6D4F26432AB00001F98B /* TaskFormViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F6D4E26432AB00001F98B /* TaskFormViewModelTests.swift */; };
+		5C7C15142644A39700F93319 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C16F7E1263B6F0E0087C325 /* CloudKit.framework */; };
 		5C897CAF26411C1C000CC9C5 /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C897CAD26411BC7000CC9C5 /* MediumWidgetView.swift */; };
 		5C897CB226412157000CC9C5 /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C897CB02641210D000CC9C5 /* SmallWidgetView.swift */; };
 		5C897CB526412636000CC9C5 /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C897CB32641261E000CC9C5 /* LargeWidgetView.swift */; };
@@ -189,6 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C7C15142644A39700F93319 /* CloudKit.framework in Frameworks */,
 				5CFA1EEC263FC31900E83A46 /* SwiftUI.framework in Frameworks */,
 				5CFA1EEA263FC31900E83A46 /* WidgetKit.framework in Frameworks */,
 			);

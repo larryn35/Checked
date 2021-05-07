@@ -19,4 +19,16 @@ struct WidgetTask: Identifiable {
     WidgetTask(title: "Vacuum living room", priority: "Medium", deadline: nil),
     WidgetTask(title: "Call mom", priority: "Medium", deadline: nil),
   ]
+  
+  init(task: Task) {
+    title = task.title_ ?? "Error"
+    priority = task.priority_ ?? "Low"
+    deadline = task.deadline_
+  }
+  
+  init(title: String, priority: String, deadline: Date?) {
+    self.title = title
+    self.priority = priority
+    self.deadline = deadline
+  }
 }

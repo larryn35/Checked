@@ -34,27 +34,46 @@ struct Provider: TimelineProvider {
   }
   
   func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    var widgetTasks: [WidgetTask] = []
+    var date = Date()
+    
+    let viewContext = PersistenceController.shared.viewContext
+    
+    // Fetch tasks
     var tasks: [Task] {
       let request: NSFetchRequest<Task> = Task.fetchRequest()
       do {
-        return try PersistenceController.shared.viewContext.fetch(request)
+        return try viewContext.fetch(request)
       } catch {
         return []
       }
     }
     
-    var widgetTasks: [WidgetTask] = []
-    
+    // Convert tasks to widgetTasks
     for task in tasks {
       if task.dateCompleted_ == nil {
-        widgetTasks.append(WidgetTask(title: task.title_ ?? "Error", priority: task.priority_ ?? "Low", deadline: task.deadline_))
+        widgetTasks.append(WidgetTask(task: task))
       }
     }
     
     let entry = TaskEntry(tasks: widgetTasks)
     
-    let timeline = Timeline(entries: [entry], policy: .never)
-    completion(timeline)
+    // Array of bool representating whether task has an upcoming deadline
+    let pendingDeadlines = tasks.map {
+      $0.deadline_ ?? Date().addingTimeInterval(-Constants.hour) > Date()
+    }
+
+    // If there are any tasks with an upcoming deadline, refresh widget every 10 minutes
+    if pendingDeadlines.contains(true) {
+      date = Calendar.current.date(byAdding: .minute, value: 10, to: date)!
+      let timeline = Timeline(entries: [entry], policy: .after(date))
+      completion(timeline)
+      
+    } else {
+      // Else, upload widget manually when a task is added/updated in the app
+      let timeline = Timeline(entries: [entry], policy: .never)
+      completion(timeline)
+    }
   }
 }
 
