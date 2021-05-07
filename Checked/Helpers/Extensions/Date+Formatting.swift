@@ -22,6 +22,13 @@ extension Date {
     return formatter.string(from: self)
   }
   
+  // time: 3:12 AM
+  var time: String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "h:mm a"
+    return formatter.string(from: self)
+  }
+  
   //  short:  5/1/21
   var short: String {
     let formatter = DateFormatter()

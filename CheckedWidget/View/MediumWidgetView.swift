@@ -62,10 +62,19 @@ struct MediumWidgetView: View {
         Spacer()
         
         // MARK: Extra tasks
-        if widgetTasks.count > 3 {
-          Text("+ \(widgetTasks.numberOfExtraTasks) more")
+        HStack {
+          if widgetTasks.count > 3 {
+            Text("+ \(widgetTasks.numberOfExtraTasks) more")
+              .customFont(style: .caption1, weight: .semibold)
+          }
+          
+          Spacer()
+          
+          Text("Updated: \(Date().time)")
             .customFont(style: .caption1, weight: .semibold)
+            .opacity(0.7)
         }
+        .padding(.bottom, 2)
       }
     }
   }

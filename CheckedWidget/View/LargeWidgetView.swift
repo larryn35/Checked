@@ -42,12 +42,22 @@ struct LargeWidgetView: View {
           }
           
           Spacer()
-          
-          if widgetTasks.count > 5 {
-            Text("+ \(widgetTasks.numberOfExtraTasksForLargeWidget) more")
-              .customFont(style: .subheadline, weight: .semibold)
-              .padding(.bottom)
+
+          // MARK: Extra tasks
+          HStack {
+            if widgetTasks.count > 5 {
+              Text("+ \(widgetTasks.numberOfExtraTasksForLargeWidget) more")
+                .customFont(style: .subheadline, weight: .semibold)
+                .padding(.bottom)
+            }
+            
+            Spacer()
+            
+            Text("Updated: \(Date().time)")
+              .customFont(style: .caption1, weight: .semibold)
+              .opacity(0.7)
           }
+          .padding(.bottom, 2)
         }
       }
     }
