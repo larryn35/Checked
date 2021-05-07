@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import WidgetKit
 
 struct PersistenceController {
   static let shared = PersistenceController()
@@ -17,6 +18,7 @@ struct PersistenceController {
     let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.io.github.larryn35.Checked")!
     let storeURL = containerURL.appendingPathComponent("Task.sqlite")
     let description = NSPersistentStoreDescription(url: storeURL)
+    description.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.io.github.larryn35.Checked")
 
     container = NSPersistentCloudKitContainer(name: "Checked")
     container.persistentStoreDescriptions = [description]
@@ -33,11 +35,14 @@ struct PersistenceController {
   }
   
   func save() {
-    do {
-      try viewContext.save()
-    } catch {
-      viewContext.rollback()
-      print(error.localizedDescription)
+    if viewContext.hasChanges {
+      do {
+        try viewContext.save()
+        WidgetCenter.shared.reloadAllTimelines()
+      } catch {
+        viewContext.rollback()
+        print(error.localizedDescription)
+      }
     }
   }
 }
