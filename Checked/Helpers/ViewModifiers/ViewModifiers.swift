@@ -11,7 +11,7 @@ import SwiftUI
 struct BlurModifier: ViewModifier {
   func body(content: Content) -> some View {
     return content
-      .frame(minWidth: .none, maxWidth: UIScreen.screenWidth, minHeight: .none, maxHeight: .infinity)
+      .frame(maxWidth: UIScreen.screenWidth, maxHeight: .infinity)
       .background(BlurView())
       .cornerRadius(20)
       .overlay(
