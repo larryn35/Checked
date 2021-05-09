@@ -34,14 +34,15 @@ struct Provider: TimelineProvider {
   }
   
   func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-    var widgetTasks: [WidgetTask] = []
-    var date = Date()
-    
     let viewContext = PersistenceController.shared.viewContext
     
-    // Fetch tasks
+    // Fetch active tasks
     var tasks: [Task] {
       let request: NSFetchRequest<Task> = Task.fetchRequest()
+      
+      let deadlinePredicate: NSPredicate = NSPredicate(format: "dateCompleted_ == nil")
+      request.predicate = deadlinePredicate
+      
       do {
         return try viewContext.fetch(request)
       } catch {
@@ -50,11 +51,7 @@ struct Provider: TimelineProvider {
     }
     
     // Convert tasks to widgetTasks
-    for task in tasks {
-      if task.dateCompleted_ == nil {
-        widgetTasks.append(WidgetTask(task: task))
-      }
-    }
+    let widgetTasks = tasks.map { WidgetTask(task: $0) }
     
     let entry = TaskEntry(tasks: widgetTasks)
     
@@ -65,7 +62,7 @@ struct Provider: TimelineProvider {
 
     // If there are any tasks with an upcoming deadline, refresh widget every 10 minutes
     if pendingDeadlines.contains(true) {
-      date = Calendar.current.date(byAdding: .minute, value: 10, to: date)!
+      let date = Calendar.current.date(byAdding: .minute, value: 10, to: Date())!
       let timeline = Timeline(entries: [entry], policy: .after(date))
       completion(timeline)
       
