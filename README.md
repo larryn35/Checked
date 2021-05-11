@@ -2,7 +2,7 @@
 
 ## About the app
 
-An iOS app that helps you manage and organize your tasks. Features cloud-based storage and the ability to add notes, set deadlines and reminders, and quickly view tasks with the widget. Built with SwiftUI and CloudKit. 
+An iOS app that helps you manage and organize your tasks. Features cloud-based storage and the ability to add notes, set deadlines and reminders, and quickly view tasks with the widget. Built with SwiftUI and CloudKit. Additional screenshots and video clips can be viewed [here](https://larryn35.github.io/checked.html).
 
 My main focuses when building Checked were UI design and learning to work with CloudKit and WidgetKit.
 <br><br>
@@ -465,11 +465,11 @@ struct Provider: TimelineProvider {
 
 ## Closing thoughts
 
-- I found planning the design in Figma to be helpful with figuring out how I wanted to present views and pass data between them
+- Using Figma was not only helpful for planning the UI of the app, but it also encouraged me to think about how I wanted to present views and pass data
 
-- The most challenging part of creating this app was getting CloudKit and the widget to work together.
+- The most challenging part of creating this app was getting CloudKit and the widget to work together
 
-- Areas for improvement include expanding the app to iPad and WatchOS and separating CloudKit from the widget
+- Areas for improvement include adding a description and call to action when the task list is empty, expanding the app to iPad and WatchOS and separating CloudKit from the widget
 
 <br>
 
@@ -481,3 +481,4 @@ struct Provider: TimelineProvider {
   - [SwiftUI Continued Learning #11: How to schedule local push notifications](https://www.youtube.com/watch?v=mG9BVAs8AIo)
   - [SwiftUI Continued Learning #10: How to add haptics (vibrations)](https://www.youtube.com/watch?v=H45bl6e0cNs)
 - [Vadim Bulavin - Keyboard Avoidance for SwiftUI Views](https://www.vadimbulavin.com/how-to-move-swiftui-view-when-keyboard-covers-text-field/)
+- [Andreas Schjønhaug - How we built the iOS 14 widget for Kahoot!](https://kahoot.com/tech-blog/how-we-built-the-ios-14-widget-for-kahoot/)
