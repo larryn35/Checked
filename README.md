@@ -229,7 +229,7 @@ final class TaskListViewModel: ObservableObject {
 
 <br>
 
-To set up a Core Data for unit testing, I referred to this [video by Swift Arcade](https://www.youtube.com/watch?v=DTz_MFxe9mk). The process involves creating a separate `NSPersistentContainer` for the tests. This container will write data to memory rather than permanent storage. This way, the app and our tests aren't sharing the same context which can lead to overwriting of data. The app will use `PersistenceController` and the tests will use `CoreDataTestStack`.
+To set up Core Data for unit testing, I referred to this [video by Swift Arcade](https://www.youtube.com/watch?v=DTz_MFxe9mk). The process involves creating a separate `NSPersistentContainer` for the tests. This container will write data to memory rather than permanent storage. This way, the app and our tests aren't sharing the same context which can lead to overwriting of data. The app will use `PersistenceController` and the tests will use `CoreDataTestStack`.
 
 ```swift
 struct CoreDataTestStack {
